@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Search, User, BriefcaseBusiness } from 'lucide-react';
+import { Menu, X, User, BriefcaseBusiness } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,8 +23,8 @@ const Header = () => {
             <Link to="/jobs" className="text-german-dark hover:text-german-primary font-medium">
               Browse Jobs
             </Link>
-            <Link to="/companies" className="text-german-dark hover:text-german-primary font-medium">
-              Companies
+            <Link to="/about" className="text-german-dark hover:text-german-primary font-medium">
+              About Us
             </Link>
             <Link to="/resources" className="text-german-dark hover:text-german-primary font-medium">
               Resources
@@ -36,9 +36,11 @@ const Header = () => {
               <User className="h-4 w-4" />
               <span>Login</span>
             </Button>
-            <Button className="bg-german-primary hover:bg-german-primary/90" size="sm">
-              Post a Job
-            </Button>
+            <Link to="/post-job">
+              <Button className="bg-german-primary hover:bg-german-primary/90" size="sm">
+                Post a Job
+              </Button>
+            </Link>
           </div>
           
           <div className="md:hidden flex items-center">
@@ -66,8 +68,8 @@ const Header = () => {
             <Link to="/jobs" className="text-german-dark hover:text-german-primary font-medium py-2 px-4">
               Browse Jobs
             </Link>
-            <Link to="/companies" className="text-german-dark hover:text-german-primary font-medium py-2 px-4">
-              Companies
+            <Link to="/about" className="text-german-dark hover:text-german-primary font-medium py-2 px-4">
+              About Us
             </Link>
             <Link to="/resources" className="text-german-dark hover:text-german-primary font-medium py-2 px-4">
               Resources
@@ -77,9 +79,11 @@ const Header = () => {
                 <User className="h-4 w-4 mr-2" />
                 Login
               </Button>
-              <Button className="bg-german-primary hover:bg-german-primary/90 w-full justify-start">
-                Post a Job
-              </Button>
+              <Link to="/post-job" className="w-full">
+                <Button className="bg-german-primary hover:bg-german-primary/90 w-full justify-start">
+                  Post a Job
+                </Button>
+              </Link>
             </div>
           </nav>
         </div>
