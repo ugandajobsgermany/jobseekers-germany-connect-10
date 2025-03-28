@@ -45,27 +45,27 @@ const companies = [
 
 const CompanySection = () => {
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-gray-50 py-10">
       <div className="container mx-auto">
-        <div className="flex justify-between items-center mb-10">
+        <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-3xl font-bold text-german-dark mb-2">Top Companies Hiring</h2>
-            <p className="text-german-muted">Find jobs in leading German companies</p>
+            <h2 className="text-2xl font-bold text-german-dark mb-1">Top Companies Hiring</h2>
+            <p className="text-german-muted text-sm">Find jobs in leading German companies</p>
           </div>
           <Link to="/companies">
-            <Button variant="outline" className="hidden md:flex items-center gap-2">
+            <Button variant="outline" className="hidden md:flex items-center gap-2 text-sm py-1 px-3 h-8">
               <span>View All Companies</span>
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-3 w-3" />
             </Button>
           </Link>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
           {companies.map((company) => (
             <Link to={`/company/${company.id}`} key={company.id}>
-              <Card className="cursor-pointer card-hover h-full">
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  <div className="h-16 w-16 mb-4 flex items-center justify-center">
+              <Card className="cursor-pointer card-hover h-full border-none shadow-none">
+                <CardContent className="p-3 flex flex-col items-center text-center">
+                  <div className="h-12 w-12 mb-2 flex items-center justify-center">
                     {company.logo ? (
                       <img 
                         src={company.logo} 
@@ -73,12 +73,12 @@ const CompanySection = () => {
                         className="max-h-full max-w-full object-contain" 
                       />
                     ) : (
-                      <Building className="h-10 w-10 text-gray-400" />
+                      <Building className="h-8 w-8 text-gray-400" />
                     )}
                   </div>
-                  <h3 className="font-semibold text-german-dark">{company.name}</h3>
-                  <p className="text-german-muted mt-1 text-sm">{company.industry}</p>
-                  <p className="text-sm mt-3 text-german-primary font-medium">
+                  <h3 className="font-semibold text-sm text-german-dark">{company.name}</h3>
+                  <p className="text-german-muted mt-0.5 text-xs">{company.industry}</p>
+                  <p className="text-xs mt-1.5 text-german-primary font-medium">
                     {company.jobCount} Open Jobs
                   </p>
                 </CardContent>
@@ -87,9 +87,9 @@ const CompanySection = () => {
           ))}
         </div>
         
-        <div className="mt-10 flex justify-center md:hidden">
+        <div className="mt-6 flex justify-center md:hidden">
           <Link to="/companies">
-            <Button className="bg-german-primary hover:bg-german-primary/90">
+            <Button className="bg-german-primary hover:bg-german-primary/90 text-sm py-1 px-3 h-8">
               View All Companies
             </Button>
           </Link>
