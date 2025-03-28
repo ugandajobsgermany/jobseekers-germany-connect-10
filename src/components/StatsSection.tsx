@@ -36,16 +36,16 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="container mx-auto section-padding">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <section className="container mx-auto py-4 md:py-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {stats.map((stat) => (
-          <Card key={stat.id} className="border-none shadow-sm">
-            <CardContent className="p-4 flex flex-col items-center text-center">
-              <div className={`p-2 rounded-full ${stat.color} bg-opacity-10 mb-2`}>
-                <stat.icon className={`h-4 w-4 ${stat.color}`} />
+          <Card key={stat.id} className="border-none shadow-none">
+            <CardContent className="p-2 flex flex-col items-center text-center">
+              <div className={`p-1.5 rounded-full ${stat.color} bg-opacity-10 mb-1`}>
+                <stat.icon className={`h-3 w-3 ${stat.color}`} />
               </div>
-              <h3 className="text-2xl font-bold text-german-dark mb-1">{stat.value}</h3>
-              <p className="text-german-muted text-sm">{stat.title}</p>
+              <h3 className="text-lg font-bold text-german-dark">{stat.value}</h3>
+              <p className="text-german-muted text-xs">{stat.title}</p>
             </CardContent>
           </Card>
         ))}
