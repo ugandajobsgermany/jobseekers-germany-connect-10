@@ -14,8 +14,8 @@ import { Search } from 'lucide-react';
 
 const SearchBar = ({ onSearch }: { onSearch?: (criteria: any) => void }) => {
   const [keywords, setKeywords] = useState('');
-  const [location, setLocation] = useState('');
-  const [category, setCategory] = useState('');
+  const [location, setLocation] = useState('any');
+  const [category, setCategory] = useState('all');
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ const SearchBar = ({ onSearch }: { onSearch?: (criteria: any) => void }) => {
               <SelectValue placeholder="Any Location" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Any Location</SelectItem>
+              <SelectItem value="any">Any Location</SelectItem>
               <SelectItem value="berlin">Berlin</SelectItem>
               <SelectItem value="munich">Munich</SelectItem>
               <SelectItem value="hamburg">Hamburg</SelectItem>
@@ -74,7 +74,7 @@ const SearchBar = ({ onSearch }: { onSearch?: (criteria: any) => void }) => {
               <SelectValue placeholder="All Categories" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
               <SelectItem value="it">IT & Technology</SelectItem>
               <SelectItem value="engineering">Engineering</SelectItem>
               <SelectItem value="finance">Finance</SelectItem>

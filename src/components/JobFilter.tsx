@@ -100,7 +100,7 @@ const JobFilter = ({ onFilterChange }: JobFilterProps) => {
                   <SelectValue placeholder="Any time" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="any">Any time</SelectItem>
+                  <SelectItem value="any_time">Any time</SelectItem>
                   <SelectItem value="today">Today</SelectItem>
                   <SelectItem value="week">Past week</SelectItem>
                   <SelectItem value="month">Past month</SelectItem>
