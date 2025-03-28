@@ -9,6 +9,8 @@ import JobsPage from "./pages/JobsPage";
 import JobDetailPage from "./pages/JobDetailPage";
 import PostJobPage from "./pages/PostJobPage";
 import AboutPage from "./pages/AboutPage";
+import ResourcesPage from "./pages/ResourcesPage";
+import ResourceDetailPage from "./pages/ResourceDetailPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/job/:id" element={<JobDetailPage />} />
           <Route path="/post-job" element={<PostJobPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/resources/:id" element={<ResourceDetailPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
