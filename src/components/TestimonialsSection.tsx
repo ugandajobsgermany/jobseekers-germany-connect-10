@@ -30,33 +30,39 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-german-dark mb-4">Success Stories</h2>
-          <p className="text-german-muted max-w-2xl mx-auto">
+    <section className="bg-gradient-to-b from-gray-50 to-white py-20">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-german-dark mb-6">Success Stories</h2>
+          <div className="w-20 h-1 bg-german-primary mx-auto mb-6 rounded-full"></div>
+          <p className="text-german-muted max-w-2xl mx-auto text-lg">
             Hear from professionals who found their ideal careers in Germany through our platform
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="border-none shadow-md h-full hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-6 md:p-8 flex flex-col h-full">
-                <div className="mb-6">
-                  <Quote className="h-8 w-8 text-german-primary mb-4 opacity-30" />
-                  <p className="text-german-dark mb-6 italic leading-relaxed">{testimonial.quote}</p>
+            <Card 
+              key={testimonial.id} 
+              className="border-none rounded-xl shadow-md h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <CardContent className="p-8 md:p-10 flex flex-col h-full">
+                <div className="mb-8">
+                  <div className="bg-german-primary/10 w-16 h-16 flex items-center justify-center rounded-full mb-6 mx-auto">
+                    <Quote className="h-8 w-8 text-german-primary" />
+                  </div>
+                  <p className="text-german-dark mb-6 italic leading-relaxed text-center">"{testimonial.quote}"</p>
                 </div>
-                <div className="flex items-center mt-auto pt-4 border-t border-gray-100">
-                  <Avatar className="h-12 w-12 mr-4 border-2 border-german-primary/20">
-                    <AvatarFallback className="bg-german-primary text-white">
+                <div className="flex flex-col items-center mt-auto pt-6 border-t border-gray-100">
+                  <Avatar className="h-16 w-16 mb-4 border-2 border-german-primary/20">
+                    <AvatarFallback className="bg-german-primary text-white text-lg">
                       {testimonial.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
-                  <div>
-                    <h4 className="font-semibold text-german-dark">{testimonial.name}</h4>
-                    <p className="text-sm text-german-muted">
-                      {testimonial.position} at {testimonial.company}
+                  <div className="text-center">
+                    <h4 className="font-semibold text-german-dark text-lg">{testimonial.name}</h4>
+                    <p className="text-german-muted">
+                      {testimonial.position} at <span className="font-medium text-german-primary">{testimonial.company}</span>
                     </p>
                   </div>
                 </div>
