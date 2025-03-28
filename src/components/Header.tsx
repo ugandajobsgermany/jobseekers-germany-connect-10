@@ -13,7 +13,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <BriefcaseBusiness className="h-8 w-8 text-german-primary" />
-            <span className="text-xl font-bold text-german-primary">JobseekerGermany</span>
+            <span className="text-xl font-bold text-german-primary">UgandajobsGermany</span>
           </Link>
           
           <nav className="hidden md:flex items-center space-x-8">

@@ -12,7 +12,7 @@ const AboutPage = () => {
       <main className="flex-grow bg-gray-50">
         <section className="bg-german-primary py-20">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About JobseekerGermany</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About UgandajobsGermany</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Connecting international talent with the best career opportunities across Germany
             </p>
@@ -23,7 +23,7 @@ const AboutPage = () => {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-german-dark mb-8">Our Mission</h2>
             <p className="text-lg mb-8">
-              JobseekerGermany was founded with a clear mission: to bridge the gap between international talent and German employers. 
+              UgandajobsGermany was founded with a clear mission: to bridge the gap between international talent and German employers. 
               We believe that diversity drives innovation, and by helping skilled professionals from around the world find 
               opportunities in Germany, we contribute to the country's economic growth and cultural enrichment.
             </p>
@@ -31,13 +31,13 @@ const AboutPage = () => {
             <h2 className="text-3xl font-bold text-german-dark mb-8 mt-12">Our Story</h2>
             <p className="text-lg mb-6">
               Founded in 2018 by a team of expats who experienced firsthand the challenges of finding employment in Germany, 
-              JobseekerGermany has grown from a small job board to a comprehensive platform serving thousands of job seekers 
+              UgandajobsGermany has grown from a small job board to a comprehensive platform serving thousands of job seekers 
               and companies across the country.
             </p>
             <p className="text-lg mb-8">
               Our founders recognized that while Germany offered excellent career opportunities, navigating the job market 
               as an international professional presented unique challenges - from language barriers to understanding local 
-              work culture and visa requirements. JobseekerGermany was created to address these challenges head-on.
+              work culture and visa requirements. UgandajobsGermany was created to address these challenges head-on.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-16">
@@ -88,7 +88,7 @@ const AboutPage = () => {
                 </div>
                 <div className="flex items-center">
                   <Award className="h-5 w-5 mr-2 text-german-primary" />
-                  <span>Email: contact@jobseekergermany.com</span>
+                  <span>Email: contact@ugandajobsgermany.com</span>
                 </div>
               </div>
             </div>

@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
               <BriefcaseBusiness className="h-7 w-7" />
-              <span className="text-xl font-bold">JobseekerGermany</span>
+              <span className="text-xl font-bold">UgandajobsGermany</span>
             </div>
             <p className="text-gray-300 mb-4">
               Connecting international talent with the best career opportunities across Germany.
@@ -95,7 +95,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
-                <span>contact@jobseekergermany.com</span>
+                <span>contact@ugandajobsgermany.com</span>
               </li>
             </ul>
           </div>
@@ -103,7 +103,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} JobseekerGermany. All rights reserved.
+            &copy; {new Date().getFullYear()} UgandajobsGermany. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="/privacy" className="text-sm text-gray-400 hover:text-white">
