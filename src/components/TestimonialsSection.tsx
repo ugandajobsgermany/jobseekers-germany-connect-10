@@ -41,12 +41,14 @@ const TestimonialsSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="border-none shadow-md h-full">
-              <CardContent className="p-8">
-                <Quote className="h-8 w-8 text-german-primary mb-4 opacity-30" />
-                <p className="text-german-dark mb-6 italic">"{testimonial.quote}"</p>
-                <div className="flex items-center">
-                  <Avatar className="h-12 w-12 mr-4">
+            <Card key={testimonial.id} className="border-none shadow-md h-full hover:shadow-lg transition-shadow duration-300">
+              <CardContent className="p-6 md:p-8 flex flex-col h-full">
+                <div className="mb-6">
+                  <Quote className="h-8 w-8 text-german-primary mb-4 opacity-30" />
+                  <p className="text-german-dark mb-6 italic leading-relaxed">{testimonial.quote}</p>
+                </div>
+                <div className="flex items-center mt-auto pt-4 border-t border-gray-100">
+                  <Avatar className="h-12 w-12 mr-4 border-2 border-german-primary/20">
                     <AvatarFallback className="bg-german-primary text-white">
                       {testimonial.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
