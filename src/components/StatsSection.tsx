@@ -37,15 +37,15 @@ const stats = [
 const StatsSection = () => {
   return (
     <section className="container mx-auto section-padding">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat) => (
-          <Card key={stat.id} className="border-none shadow-lg">
-            <CardContent className="p-6 flex flex-col items-center text-center">
-              <div className={`p-3 rounded-full ${stat.color} bg-opacity-10 mb-4`}>
-                <stat.icon className={`h-6 w-6 ${stat.color}`} />
+          <Card key={stat.id} className="border-none shadow-sm">
+            <CardContent className="p-4 flex flex-col items-center text-center">
+              <div className={`p-2 rounded-full ${stat.color} bg-opacity-10 mb-2`}>
+                <stat.icon className={`h-4 w-4 ${stat.color}`} />
               </div>
-              <h3 className="text-3xl font-bold text-german-dark mb-2">{stat.value}</h3>
-              <p className="text-german-muted">{stat.title}</p>
+              <h3 className="text-2xl font-bold text-german-dark mb-1">{stat.value}</h3>
+              <p className="text-german-muted text-sm">{stat.title}</p>
             </CardContent>
           </Card>
         ))}
