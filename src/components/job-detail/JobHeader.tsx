@@ -6,12 +6,27 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Job } from '@/types/job';
+import { useJobActions } from '@/hooks/useJobActions';
 
 interface JobHeaderProps {
   job: Job;
+  onJobUpdate?: (updatedJob: Job) => void;
 }
 
-const JobHeader = ({ job }: JobHeaderProps) => {
+const JobHeader = ({ job, onJobUpdate }: JobHeaderProps) => {
+  const { toggleSaveJob, isJobSaved, shareJob } = useJobActions();
+  
+  const handleSaveJob = () => {
+    const updatedJob = toggleSaveJob(job);
+    if (onJobUpdate) {
+      onJobUpdate(updatedJob);
+    }
+  };
+  
+  const handleShareJob = () => {
+    shareJob(job);
+  };
+
   return (
     <Card className="mb-8">
       <CardContent className="p-8">
@@ -32,11 +47,21 @@ const JobHeader = ({ job }: JobHeaderProps) => {
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
               <h1 className="text-2xl md:text-3xl font-bold text-german-dark">{job.title}</h1>
               <div className="flex gap-2 mt-2 md:mt-0">
-                <Button variant="outline" size="sm" className="flex items-center gap-1">
-                  <Bookmark className="h-4 w-4" />
-                  <span className="hidden md:inline">Save</span>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className={`flex items-center gap-1 ${isJobSaved(job.id) ? 'bg-german-light text-german-primary' : ''}`}
+                  onClick={handleSaveJob}
+                >
+                  <Bookmark className={`h-4 w-4 ${isJobSaved(job.id) ? 'fill-german-primary' : ''}`} />
+                  <span className="hidden md:inline">{isJobSaved(job.id) ? 'Saved' : 'Save'}</span>
                 </Button>
-                <Button variant="outline" size="sm" className="flex items-center gap-1">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="flex items-center gap-1"
+                  onClick={handleShareJob}
+                >
                   <Share2 className="h-4 w-4" />
                   <span className="hidden md:inline">Share</span>
                 </Button>

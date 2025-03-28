@@ -4,12 +4,23 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Bookmark } from 'lucide-react';
 import { Job } from '@/types/job';
+import { useJobActions } from '@/hooks/useJobActions';
 
 interface JobSummaryProps {
   job: Job;
+  onJobUpdate?: (updatedJob: Job) => void;
 }
 
-const JobSummary = ({ job }: JobSummaryProps) => {
+const JobSummary = ({ job, onJobUpdate }: JobSummaryProps) => {
+  const { toggleSaveJob, isJobSaved } = useJobActions();
+  
+  const handleSaveJob = () => {
+    const updatedJob = toggleSaveJob(job);
+    if (onJobUpdate) {
+      onJobUpdate(updatedJob);
+    }
+  };
+
   return (
     <Card className="mb-8 sticky top-24">
       <CardContent className="p-6">
@@ -51,9 +62,13 @@ const JobSummary = ({ job }: JobSummaryProps) => {
           <Button className="bg-german-primary hover:bg-german-primary/90 w-full">
             Apply Now
           </Button>
-          <Button variant="outline" className="w-full flex items-center justify-center gap-2">
-            <Bookmark className="h-4 w-4" />
-            <span>Save Job</span>
+          <Button 
+            variant="outline" 
+            className={`w-full flex items-center justify-center gap-2 ${isJobSaved(job.id) ? 'bg-german-light text-german-primary' : ''}`}
+            onClick={handleSaveJob}
+          >
+            <Bookmark className={`h-4 w-4 ${isJobSaved(job.id) ? 'fill-german-primary' : ''}`} />
+            <span>{isJobSaved(job.id) ? 'Saved' : 'Save Job'}</span>
           </Button>
         </div>
       </CardContent>

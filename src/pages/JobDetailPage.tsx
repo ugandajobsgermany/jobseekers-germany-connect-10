@@ -11,16 +11,30 @@ import JobSummary from '@/components/job-detail/JobSummary';
 import SimilarJobs from '@/components/job-detail/SimilarJobs';
 import { mockJobs } from '@/data/mockData';
 import { Job } from '@/types/job';
+import { useJobActions } from '@/hooks/useJobActions';
 
 const JobDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const [job, setJob] = useState<Job | null>(null);
+  const { isJobSaved } = useJobActions();
   
   useEffect(() => {
     // In a real app, this would be an API call
     const foundJob = mockJobs.find(job => job.id === id);
-    setJob(foundJob || null);
-  }, [id]);
+    if (foundJob) {
+      // Add saved status to the job
+      setJob({
+        ...foundJob,
+        isSaved: isJobSaved(foundJob.id)
+      });
+    } else {
+      setJob(null);
+    }
+  }, [id, isJobSaved]);
+  
+  const handleJobUpdate = (updatedJob: Job) => {
+    setJob(updatedJob);
+  };
   
   if (!job) {
     return <JobNotFound />;
@@ -38,14 +52,14 @@ const JobDetailPage = () => {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Main Content */}
             <div className="lg:w-2/3">
-              <JobHeader job={job} />
+              <JobHeader job={job} onJobUpdate={handleJobUpdate} />
               <JobDescription job={job} />
               <JobApplication job={job} />
             </div>
             
             {/* Sidebar */}
             <div className="lg:w-1/3">
-              <JobSummary job={job} />
+              <JobSummary job={job} onJobUpdate={handleJobUpdate} />
             </div>
           </div>
           
