@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, User, BriefcaseBusiness } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +12,6 @@ const Header = () => {
       <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <BriefcaseBusiness className="h-8 w-8 text-german-primary" />
             <span className="text-xl font-bold text-german-primary">UgandajobsGermany</span>
           </Link>
           
