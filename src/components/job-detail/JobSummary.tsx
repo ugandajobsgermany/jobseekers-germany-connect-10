@@ -2,9 +2,10 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Bookmark } from 'lucide-react';
+import { Bookmark, CheckCircle, Send } from 'lucide-react';
 import { Job } from '@/types/job';
 import { useJobActions } from '@/hooks/useJobActions';
+import { useJobApplication } from '@/hooks/useJobApplication';
 
 interface JobSummaryProps {
   job: Job;
@@ -13,6 +14,7 @@ interface JobSummaryProps {
 
 const JobSummary = ({ job, onJobUpdate }: JobSummaryProps) => {
   const { toggleSaveJob, isJobSaved } = useJobActions();
+  const { applyForJob, hasApplied } = useJobApplication();
   
   const handleSaveJob = () => {
     const updatedJob = toggleSaveJob(job);
@@ -20,6 +22,15 @@ const JobSummary = ({ job, onJobUpdate }: JobSummaryProps) => {
       onJobUpdate(updatedJob);
     }
   };
+  
+  const handleApply = () => {
+    const updatedJob = applyForJob(job);
+    if (onJobUpdate) {
+      onJobUpdate(updatedJob);
+    }
+  };
+
+  const applied = hasApplied(job.id);
 
   return (
     <Card className="mb-8 sticky top-24">
@@ -59,9 +70,20 @@ const JobSummary = ({ job, onJobUpdate }: JobSummaryProps) => {
         </div>
         
         <div className="mt-6 flex flex-col gap-3">
-          <Button className="bg-german-primary hover:bg-german-primary/90 w-full">
-            Apply Now
-          </Button>
+          {applied ? (
+            <Button className="bg-green-600 hover:bg-green-700 w-full" disabled>
+              <CheckCircle className="mr-2 h-4 w-4" />
+              <span>Application Submitted</span>
+            </Button>
+          ) : (
+            <Button 
+              className="bg-german-primary hover:bg-german-primary/90 w-full" 
+              onClick={handleApply}
+            >
+              <Send className="mr-2 h-4 w-4" />
+              <span>Apply Now</span>
+            </Button>
+          )}
           <Button 
             variant="outline" 
             className={`w-full flex items-center justify-center gap-2 ${isJobSaved(job.id) ? 'bg-german-light text-german-primary' : ''}`}
