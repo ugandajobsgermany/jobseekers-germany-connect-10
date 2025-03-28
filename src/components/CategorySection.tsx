@@ -58,24 +58,24 @@ const categories = [
 
 const CategorySection = () => {
   return (
-    <section className="container mx-auto section-padding">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold text-german-dark mb-4">Browse Jobs by Category</h2>
-        <p className="text-german-muted max-w-2xl mx-auto">
+    <section className="container mx-auto py-8 md:py-10">
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-german-dark mb-2">Browse Jobs by Category</h2>
+        <p className="text-german-muted text-sm max-w-2xl mx-auto">
           Explore job opportunities across various industries in Germany
         </p>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
         {categories.map((category) => (
           <Link to={`/jobs?category=${category.id}`} key={category.id}>
-            <Card className="cursor-pointer card-hover h-full">
-              <CardContent className="p-6 flex flex-col items-center text-center">
-                <div className={`p-3 rounded-lg ${category.color} mb-4`}>
-                  <category.icon className="h-6 w-6" />
+            <Card className="cursor-pointer card-hover h-full border-none shadow-none">
+              <CardContent className="p-3 flex flex-col items-center text-center">
+                <div className={`p-2 rounded-lg ${category.color} mb-2`}>
+                  <category.icon className="h-4 w-4" />
                 </div>
-                <h3 className="font-semibold text-lg text-german-dark">{category.name}</h3>
-                <p className="text-german-muted mt-2">{category.count} Open Positions</p>
+                <h3 className="font-semibold text-sm text-german-dark">{category.name}</h3>
+                <p className="text-german-muted text-xs mt-1">{category.count} Open Positions</p>
               </CardContent>
             </Card>
           </Link>
