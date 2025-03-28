@@ -5,9 +5,10 @@ import { Building, Bookmark, Share2, MapPin, Euro, Briefcase, Clock } from 'luci
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Job } from '@/types/job';
 
 interface JobHeaderProps {
-  job: any;
+  job: Job;
 }
 
 const JobHeader = ({ job }: JobHeaderProps) => {

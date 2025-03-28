@@ -10,10 +10,11 @@ import JobApplication from '@/components/job-detail/JobApplication';
 import JobSummary from '@/components/job-detail/JobSummary';
 import SimilarJobs from '@/components/job-detail/SimilarJobs';
 import { mockJobs } from '@/data/mockData';
+import { Job } from '@/types/job';
 
 const JobDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [job, setJob] = useState<any | null>(null);
+  const [job, setJob] = useState<Job | null>(null);
   
   useEffect(() => {
     // In a real app, this would be an API call

@@ -2,9 +2,10 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Job } from '@/types/job';
 
 interface JobApplicationProps {
-  job: any;
+  job: Job;
 }
 
 const JobApplication = ({ job }: JobApplicationProps) => {

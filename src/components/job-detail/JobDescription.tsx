@@ -2,9 +2,10 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle2 } from 'lucide-react';
+import { Job } from '@/types/job';
 
 interface JobDescriptionProps {
-  job: any;
+  job: Job;
 }
 
 const JobDescription = ({ job }: JobDescriptionProps) => {

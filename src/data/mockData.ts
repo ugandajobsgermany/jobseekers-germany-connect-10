@@ -1,5 +1,6 @@
+import { Job } from '@/types/job';
 
-export const mockJobs = [
+export const mockJobs: Job[] = [
   {
     id: "1",
     title: "Senior Software Engineer",

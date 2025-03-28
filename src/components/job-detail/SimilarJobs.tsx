@@ -1,10 +1,11 @@
 
 import React from 'react';
 import JobCard from '@/components/JobCard';
+import { Job } from '@/types/job';
 
 interface SimilarJobsProps {
-  job: any;
-  similarJobs: any[];
+  job: Job;
+  similarJobs: Job[];
 }
 
 const SimilarJobs = ({ job, similarJobs }: SimilarJobsProps) => {

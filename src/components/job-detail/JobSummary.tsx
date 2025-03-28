@@ -3,9 +3,10 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Bookmark } from 'lucide-react';
+import { Job } from '@/types/job';
 
 interface JobSummaryProps {
-  job: any;
+  job: Job;
 }
 
 const JobSummary = ({ job }: JobSummaryProps) => {
