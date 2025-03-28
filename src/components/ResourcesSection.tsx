@@ -53,30 +53,30 @@ const resources = [
 const ResourcesSection = () => {
   return (
     <section className="container mx-auto section-padding">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-german-dark mb-4">Helpful Resources</h2>
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold text-german-dark mb-3">Helpful Resources</h2>
         <p className="text-german-muted max-w-2xl mx-auto">
           Essential guides and resources to help you navigate working and living in Germany
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         {resources.map((resource) => (
           <Link to={`/resources/${resource.id}`} key={resource.id}>
             <Card className="cursor-pointer card-hover h-full">
-              <CardContent className="p-6">
-                <div className={`p-3 rounded-lg ${resource.color} w-fit mb-4`}>
-                  <resource.icon className="h-6 w-6" />
+              <CardContent className="p-3">
+                <div className={`p-2 rounded-lg ${resource.color} w-fit mb-2`}>
+                  <resource.icon className="h-5 w-5" />
                 </div>
-                <h3 className="font-semibold text-lg text-german-dark mb-2">{resource.title}</h3>
-                <p className="text-german-muted">{resource.description}</p>
+                <h3 className="font-semibold text-sm text-german-dark mb-1">{resource.title}</h3>
+                <p className="text-german-muted text-xs">{resource.description}</p>
               </CardContent>
             </Card>
           </Link>
         ))}
       </div>
       
-      <div className="mt-12 text-center">
+      <div className="mt-8 text-center">
         <Link to="/resources">
           <Button className="bg-german-primary hover:bg-german-primary/90">
             View All Resources
