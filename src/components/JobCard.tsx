@@ -9,13 +9,14 @@ interface JobCardProps {
   id: string;
   title: string;
   company: string;
-  companyLogo: string;
+  companyLogo?: string; // Changed to optional to match Job interface
   location: string;
   salary: string;
   jobType: string;
   category: string;
   postedAt: string;
   isFeatured?: boolean;
+  isSaved?: boolean;
 }
 
 const JobCard = ({
@@ -28,7 +29,8 @@ const JobCard = ({
   jobType,
   category,
   postedAt,
-  isFeatured = false
+  isFeatured = false,
+  isSaved = false
 }: JobCardProps) => {
   return (
     <Link to={`/job/${id}`}>
