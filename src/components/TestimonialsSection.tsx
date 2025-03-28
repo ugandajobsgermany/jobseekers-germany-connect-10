@@ -2,6 +2,7 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Quote } from 'lucide-react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const testimonials = [
   {
@@ -9,15 +10,13 @@ const testimonials = [
     name: 'Sarah Johnson',
     position: 'Software Engineer',
     company: 'SAP',
-    image: 'https://randomuser.me/api/portraits/women/32.jpg',
-    quote: 'Finding a tech job in Germany as an expat was challenging until I found JobseekerGermany. Their platform helped me find the perfect role at SAP and provided guidance through the visa process.',
+    quote: 'Finding a tech job in Germany as an expat was challenging until I found UgandajobsGermany. Their platform helped me find the perfect role at SAP and provided guidance through the visa process.',
   },
   {
     id: 2,
     name: 'Miguel Rodriguez',
     position: 'Finance Analyst',
     company: 'Deutsche Bank',
-    image: 'https://randomuser.me/api/portraits/men/46.jpg',
     quote: 'The job filtering system made it easy to find finance positions that matched my experience. Within two months, I landed a great role at Deutsche Bank. The relocation resources were invaluable.',
   },
   {
@@ -25,8 +24,7 @@ const testimonials = [
     name: 'Akiko Tanaka',
     position: 'UX Designer',
     company: 'Zalando',
-    image: 'https://randomuser.me/api/portraits/women/64.jpg',
-    quote: 'JobseekerGermany stands out because they understand the needs of international professionals. Their resources for learning German while job hunting helped me immensely in securing my dream design role.',
+    quote: 'UgandajobsGermany stands out because they understand the needs of international professionals. Their resources for learning German while job hunting helped me immensely in securing my dream design role.',
   },
 ];
 
@@ -48,11 +46,11 @@ const TestimonialsSection = () => {
                 <Quote className="h-8 w-8 text-german-primary mb-4 opacity-30" />
                 <p className="text-german-dark mb-6 italic">"{testimonial.quote}"</p>
                 <div className="flex items-center">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name} 
-                    className="h-12 w-12 rounded-full object-cover mr-4" 
-                  />
+                  <Avatar className="h-12 w-12 mr-4">
+                    <AvatarFallback className="bg-german-primary text-white">
+                      {testimonial.name.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
                   <div>
                     <h4 className="font-semibold text-german-dark">{testimonial.name}</h4>
                     <p className="text-sm text-german-muted">
