@@ -19,6 +19,7 @@ const Index = () => {
         title="UgandajobsGermany - Connect with Top German Employers" 
         description="UgandajobsGermany connects Ugandan talents with top employers in Germany. Find your dream job, visa information, and relocation resources."
         canonical="https://ugandajobsgermany.online"
+        schemaType="both"
       />
       <Header />
       <main className="flex-grow">
