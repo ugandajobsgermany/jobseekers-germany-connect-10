@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BriefcaseBusiness, Mail, MapPin, Phone } from 'lucide-react';
@@ -90,11 +91,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2" />
-                <span>+49 30 1234 5678</span>
+                <span>+4915214636946</span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
-                <span>contact@ugandajobsgermany.com</span>
+                <span>ugandajobsgermany@gmail.com</span>
               </li>
             </ul>
           </div>
