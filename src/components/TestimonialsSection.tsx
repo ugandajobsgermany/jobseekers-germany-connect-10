@@ -15,36 +15,89 @@ interface Testimonial {
   id: number;
   name: string;
   position: string;
-  company: string;
   quote: string;
 }
 
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'Sarah Johnson',
-    position: 'Software Engineer',
-    company: 'SAP',
-    quote: 'Finding a tech job in Germany as an expat was challenging until I found UgandajobsGermany. Their platform helped me find the perfect role at SAP and provided guidance through the visa process.',
+    name: 'Mukasa David',
+    position: 'Warehouse Worker',
+    quote: 'I never thought I could find a job in Germany so easily! Uganda Jobs Germany helped me through the whole process, from visa application to securing a warehouse job. Now, I am earning a good salary and supporting my family back home. Thank you!',
   },
   {
     id: 2,
-    name: 'Miguel Rodriguez',
-    position: 'Finance Analyst',
-    company: 'Deutsche Bank',
-    quote: 'The job filtering system made it easy to find finance positions that matched my experience. Within two months, I landed a great role at Deutsche Bank. The relocation resources were invaluable.',
+    name: 'Namutebi Sarah',
+    position: 'Caregiver',
+    quote: 'As a caregiver, I always wanted to work in Europe but didn\'t know how to start. This platform guided me, and within a few months, I got a job in a nursing home in Berlin. The pay is good, and I have a bright future ahead!',
   },
   {
     id: 3,
-    name: 'Akiko Tanaka',
-    position: 'UX Designer',
-    company: 'Zalando',
-    quote: 'UgandajobsGermany stands out because they understand the needs of international professionals. Their resources for learning German while job hunting helped me immensely in securing my dream design role.',
+    name: 'Kasule James',
+    position: 'Construction Worker',
+    quote: 'I was struggling to find stable work in Uganda. Through Uganda Jobs Germany, I applied for a construction job in Hamburg. The process was smooth, and now I am working in Germany with great benefits. I highly recommend them!',
+  },
+  {
+    id: 4,
+    name: 'Nantongo Grace',
+    position: 'Hotel Housekeeper',
+    quote: 'I was skeptical at first, but Uganda Jobs Germany is real! They connected me to a hotel job in Munich, and now I am earning in Euros. It\'s a life-changing opportunity!',
+  },
+  {
+    id: 5,
+    name: 'Lubega Peter',
+    position: 'Supermarket Assistant',
+    quote: 'I only had basic education, but this platform helped me find a supermarket job in Germany. The working conditions are great, and I am able to save money for my future. I am so grateful!',
+  },
+  {
+    id: 6,
+    name: 'Nsubuga Ronald',
+    position: 'Factory Worker',
+    quote: 'Leaving Uganda for work in Germany was a big step for me, but Uganda Jobs Germany made the process easy. Now, I have a stable job in a factory, earning well and building my future. I encourage others to take this opportunity!',
+  },
+  {
+    id: 7,
+    name: 'Nakato Esther',
+    position: 'Waitress',
+    quote: 'I applied for a waitress job through Uganda Jobs Germany, and within a few months, I was in Germany working in a restaurant. The salary is good, and I am gaining great experience. I\'m so happy I took this chance!',
+  },
+  {
+    id: 8,
+    name: 'Ssekitoleko John',
+    position: 'Delivery Driver',
+    quote: 'I had been working as a boda boda rider in Uganda, but now I drive delivery vans in Germany. The pay is way better, and I can send money home to my family every month. This opportunity changed my life!',
+  },
+  {
+    id: 9,
+    name: 'Nabirye Joan',
+    position: 'Cleaner',
+    quote: 'At first, I thought it would be hard to find a job in Germany, but Uganda Jobs Germany helped me get a cleaning job in Frankfurt. The work is simple, and the pay is way better than I expected. I am saving for my future!',
+  },
+  {
+    id: 10,
+    name: 'Kato Brian',
+    position: 'Supermarket Cashier',
+    quote: 'I had no experience working in a foreign country, but with the help of Uganda Jobs Germany, I got a supermarket cashier job in Berlin. The working conditions are good, and I have met so many people from different cultures!',
+  },
+  {
+    id: 11,
+    name: 'Mugisha Kevin',
+    position: 'Farm Worker',
+    quote: 'I came to Germany for a seasonal farming job, and it was a great experience. The pay was good, and I learned a lot. I plan to return for another contract next year!',
+  },
+  {
+    id: 12,
+    name: 'Namwanje Diana',
+    position: 'Childcare Assistant',
+    quote: 'I love working with children, and Uganda Jobs Germany helped me get a job in a daycare center. The training was easy, and now I have a job that I truly enjoy. I am very thankful!',
   },
 ];
 
 const TestimonialsSection = () => {
   const [selectedTestimonial, setSelectedTestimonial] = useState<Testimonial | null>(null);
+  
+  // Show only the first 6 testimonials initially, and use responsive grid
+  const displayedTestimonials = testimonials.slice(0, 6);
   
   return (
     <section className="bg-gradient-to-b from-gray-50 to-white py-8">
@@ -53,12 +106,12 @@ const TestimonialsSection = () => {
           <h2 className="text-xl md:text-2xl font-bold text-german-dark mb-2">Success Stories</h2>
           <div className="w-12 h-0.5 bg-german-primary mx-auto mb-2 rounded-full"></div>
           <p className="text-german-muted max-w-xl mx-auto text-sm">
-            Hear from professionals who found their ideal careers in Germany
+            Hear from Ugandans who found their dream jobs in Germany
           </p>
         </div>
         
-        <div className="grid grid-cols-3 gap-3 max-w-4xl mx-auto">
-          {testimonials.map((testimonial, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-4xl mx-auto">
+          {displayedTestimonials.map((testimonial, index) => (
             <Card 
               key={testimonial.id} 
               className="relative border-none rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 overflow-hidden animate-fade-in cursor-pointer"
@@ -85,7 +138,7 @@ const TestimonialsSection = () => {
                   <div>
                     <h4 className="font-bold text-german-dark text-xs">{testimonial.name}</h4>
                     <p className="text-german-muted text-[10px]">
-                      {testimonial.position} at <span className="font-medium text-german-primary">{testimonial.company}</span>
+                      {testimonial.position}
                     </p>
                   </div>
                 </div>
@@ -108,7 +161,7 @@ const TestimonialsSection = () => {
               {selectedTestimonial?.name}
             </DialogTitle>
             <DialogDescription className="text-sm">
-              {selectedTestimonial?.position} at {selectedTestimonial?.company}
+              {selectedTestimonial?.position}
             </DialogDescription>
           </DialogHeader>
           <div className="p-6 bg-gray-50 rounded-md my-4">
