@@ -44,9 +44,10 @@ const companies = [
 ];
 
 const CompanySection = () => {
-  // Handle image loading errors
+  // Handle image loading errors with a more robust fallback
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = `https://via.placeholder.com/48/607d8b/ffffff?text=${e.currentTarget.alt.charAt(0)}`;
+    const initial = e.currentTarget.alt.charAt(0).toUpperCase();
+    e.currentTarget.src = `https://ui-avatars.com/api/?name=${initial}&background=607d8b&color=ffffff&size=48`;
   };
 
   return (

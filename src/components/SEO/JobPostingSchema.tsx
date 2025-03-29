@@ -40,6 +40,11 @@ const JobPostingSchema = ({ job }: JobPostingSchemaProps) => {
     return date.toISOString();
   })();
 
+  // Ensure logo URL is valid or use a placeholder
+  const logoUrl = job.companyLogo && job.companyLogo.startsWith('http') 
+    ? job.companyLogo 
+    : `https://ui-avatars.com/api/?name=${job.company.charAt(0)}&background=607d8b&color=ffffff&size=128`;
+
   // Build structured data object
   const structuredData = {
     "@context": "https://schema.org",
@@ -52,7 +57,7 @@ const JobPostingSchema = ({ job }: JobPostingSchemaProps) => {
     "hiringOrganization": {
       "@type": "Organization",
       "name": job.company,
-      "logo": job.companyLogo || `https://ugandajobsgermany.online/logo-placeholder.png`
+      "logo": logoUrl
     },
     "jobLocation": {
       "@type": "Place",

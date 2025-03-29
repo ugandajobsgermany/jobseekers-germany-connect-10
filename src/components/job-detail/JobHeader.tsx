@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Building, Bookmark, Share2, MapPin, Euro, Briefcase, Clock } from 'lucide-react';
@@ -27,9 +26,9 @@ const JobHeader = ({ job, onJobUpdate }: JobHeaderProps) => {
     shareJob(job);
   };
 
-  // Handle image loading errors
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = `https://via.placeholder.com/64/607d8b/ffffff?text=${job.company.charAt(0)}`;
+    const initial = job.company.charAt(0).toUpperCase();
+    e.currentTarget.src = `https://ui-avatars.com/api/?name=${initial}&background=607d8b&color=ffffff&size=64`;
   };
 
   return (

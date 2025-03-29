@@ -34,7 +34,7 @@ const JobCard = ({
 }: JobCardProps) => {
   const [imageError, setImageError] = useState(false);
   
-  // Handle image loading errors
+  // Handle image loading errors with a more robust fallback
   const handleImageError = () => {
     setImageError(true);
   };
