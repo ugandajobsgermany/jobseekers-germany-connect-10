@@ -32,6 +32,11 @@ const JobCard = ({
   isFeatured = false,
   isSaved = false
 }: JobCardProps) => {
+  // Handle image loading errors
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = 'https://via.placeholder.com/48?text=' + company.charAt(0);
+  };
+
   return (
     <Link to={`/job/${id}`}>
       <Card className={`cursor-pointer card-hover ${isFeatured ? 'border-german-secondary border-2' : ''}`}>
@@ -49,6 +54,7 @@ const JobCard = ({
                   src={companyLogo} 
                   alt={`${company} logo`} 
                   className="w-full h-full object-contain p-1" 
+                  onError={handleImageError}
                 />
               ) : (
                 <Briefcase className="h-6 w-6 text-gray-400" />

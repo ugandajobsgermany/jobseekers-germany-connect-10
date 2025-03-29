@@ -44,6 +44,11 @@ const companies = [
 ];
 
 const CompanySection = () => {
+  // Handle image loading errors
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = `https://via.placeholder.com/48/607d8b/ffffff?text=${e.currentTarget.alt.charAt(0)}`;
+  };
+
   return (
     <section className="bg-gray-50 py-10">
       <div className="container mx-auto">
@@ -71,6 +76,8 @@ const CompanySection = () => {
                         src={company.logo} 
                         alt={`${company.name} logo`} 
                         className="max-h-full max-w-full object-contain" 
+                        onError={handleImageError}
+                        loading="lazy"
                       />
                     ) : (
                       <Building className="h-8 w-8 text-gray-400" />

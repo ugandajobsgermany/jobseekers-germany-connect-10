@@ -27,6 +27,11 @@ const JobHeader = ({ job, onJobUpdate }: JobHeaderProps) => {
     shareJob(job);
   };
 
+  // Handle image loading errors
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = `https://via.placeholder.com/64/607d8b/ffffff?text=${job.company.charAt(0)}`;
+  };
+
   return (
     <Card className="mb-8">
       <CardContent className="p-8">
@@ -37,6 +42,7 @@ const JobHeader = ({ job, onJobUpdate }: JobHeaderProps) => {
                 src={job.companyLogo} 
                 alt={`${job.company} logo`} 
                 className="max-w-full max-h-full object-contain p-1" 
+                onError={handleImageError}
               />
             ) : (
               <Building className="h-8 w-8 text-gray-400" />
