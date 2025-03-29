@@ -1,10 +1,25 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Quote } from 'lucide-react';
+import { Quote, X } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
-const testimonials = [
+interface Testimonial {
+  id: number;
+  name: string;
+  position: string;
+  company: string;
+  quote: string;
+}
+
+const testimonials: Testimonial[] = [
   {
     id: 1,
     name: 'Sarah Johnson',
@@ -29,6 +44,8 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
+  const [selectedTestimonial, setSelectedTestimonial] = useState<Testimonial | null>(null);
+  
   return (
     <section className="bg-gradient-to-b from-gray-50 to-white py-8">
       <div className="container mx-auto px-3">
@@ -44,11 +61,12 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <Card 
               key={testimonial.id} 
-              className="relative border-none rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 overflow-hidden animate-fade-in"
+              className="relative border-none rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 overflow-hidden animate-fade-in cursor-pointer"
               style={{ 
                 animationDelay: `${index * 100}ms`,
                 animationFillMode: 'both'
               }}
+              onClick={() => setSelectedTestimonial(testimonial)}
             >
               <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-german-primary to-german-secondary"></div>
               <CardContent className="p-3 flex flex-col h-full">
@@ -76,6 +94,31 @@ const TestimonialsSection = () => {
           ))}
         </div>
       </div>
+
+      {/* Testimonial Popup Dialog */}
+      <Dialog open={selectedTestimonial !== null} onOpenChange={(open) => !open && setSelectedTestimonial(null)}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Avatar className="h-8 w-8 mr-2">
+                <AvatarFallback className="bg-gradient-to-br from-german-primary to-german-primary/80 text-white">
+                  {selectedTestimonial?.name.split(' ').map(n => n[0]).join('')}
+                </AvatarFallback>
+              </Avatar>
+              {selectedTestimonial?.name}
+            </DialogTitle>
+            <DialogDescription className="text-sm">
+              {selectedTestimonial?.position} at {selectedTestimonial?.company}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="p-6 bg-gray-50 rounded-md my-4">
+            <Quote className="h-5 w-5 text-german-primary float-left mr-2 mt-1" />
+            <p className="text-german-dark italic">
+              {selectedTestimonial?.quote}
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
