@@ -11,6 +11,11 @@ import AboutPage from "./pages/AboutPage";
 import ResourcesPage from "./pages/ResourcesPage";
 import ResourceDetailPage from "./pages/ResourceDetailPage";
 import NotFound from "./pages/NotFound";
+import VisaInfoPage from "./pages/VisaInfoPage";
+import RelocationPage from "./pages/RelocationPage";
+import GermanLanguagePage from "./pages/GermanLanguagePage";
+import BlogPage from "./pages/BlogPage";
+import FAQPage from "./pages/FAQPage";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +32,11 @@ const App = () => (
           <Route path="/about" element={<AboutPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/resources/:id" element={<ResourceDetailPage />} />
+          <Route path="/visa-info" element={<VisaInfoPage />} />
+          <Route path="/relocation" element={<RelocationPage />} />
+          <Route path="/german-language" element={<GermanLanguagePage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/faq" element={<FAQPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </TooltipProvider>
