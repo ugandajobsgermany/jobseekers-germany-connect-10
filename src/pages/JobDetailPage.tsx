@@ -9,7 +9,7 @@ import JobDescription from '@/components/job-detail/JobDescription';
 import JobApplication from '@/components/job-detail/JobApplication';
 import JobSummary from '@/components/job-detail/JobSummary';
 import SimilarJobs from '@/components/job-detail/SimilarJobs';
-import { mockJobs } from '@/data/mockData';
+import { mockJobs } from '@/data/jobs';
 import { Job } from '@/types/job';
 import { useJobActions } from '@/hooks/useJobActions';
 import { useJobApplication } from '@/hooks/useJobApplication';

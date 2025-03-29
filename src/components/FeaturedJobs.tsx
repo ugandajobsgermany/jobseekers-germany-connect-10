@@ -4,7 +4,7 @@ import JobCard from './JobCard';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { mockJobs } from '@/data/mockData';
+import { mockJobs } from '@/data/jobs';
 
 const FeaturedJobs = () => {
   // Just get first 6 jobs and mark first 2 as featured

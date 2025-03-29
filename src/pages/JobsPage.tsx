@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import JobFilter from '@/components/JobFilter';
 import JobCard from '@/components/JobCard';
 import SearchBar from '@/components/SearchBar';
-import { mockJobs } from '@/data/mockData';
+import { mockJobs } from '@/data/jobs';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, ListFilter, X } from 'lucide-react';
 
