@@ -9,12 +9,24 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useAuth } from '@/contexts/AuthContext'
 import { Loader } from 'lucide-react'
 import SEO from '@/components/SEO'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage, Form } from '@/components/ui/form'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const loginSchema = z.object({
+  email: z.string().email('Please enter a valid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+})
+
+const registerSchema = z.object({
+  fullName: z.string().min(2, 'Please enter your full name'),
+  phoneNumber: z.string().min(8, 'Please enter a valid phone number'),
+  email: z.string().email('Please enter a valid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+})
 
 const AuthPage = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [fullName, setFullName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const { signIn, signUp, user } = useAuth()
   const navigate = useNavigate()
@@ -25,21 +37,37 @@ const AuthPage = () => {
     }
   }, [user, navigate])
 
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const loginForm = useForm({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    }
+  })
+
+  const registerForm = useForm({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      fullName: '',
+      phoneNumber: '',
+      email: '',
+      password: '',
+    }
+  })
+
+  const handleSignIn = async (values: z.infer<typeof loginSchema>) => {
     setIsLoading(true)
     try {
-      await signIn(email, password)
+      await signIn(values.email, values.password)
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSignUp = async (values: z.infer<typeof registerSchema>) => {
     setIsLoading(true)
     try {
-      await signUp(email, password, fullName, phoneNumber)
+      await signUp(values.email, values.password, values.fullName, values.phoneNumber)
     } finally {
       setIsLoading(false)
     }
@@ -72,31 +100,43 @@ const AuthPage = () => {
               <TabsTrigger value="register">Register</TabsTrigger>
             </TabsList>
             <TabsContent value="login">
-              <form onSubmit={handleSignIn}>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="your.email@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
-                    <Input 
-                      id="password" 
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
+              <Form {...loginForm}>
+                <form onSubmit={loginForm.handleSubmit(handleSignIn)} className="space-y-4">
+                  <FormField
+                    control={loginForm.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="your.email@example.com" 
+                            type="email"
+                            disabled={isLoading}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={loginForm.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="password"
+                            disabled={isLoading}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? (
                       <>
@@ -107,59 +147,81 @@ const AuthPage = () => {
                       'Login'
                     )}
                   </Button>
-                </div>
-              </form>
+                </form>
+              </Form>
             </TabsContent>
             <TabsContent value="register">
-              <form onSubmit={handleSignUp}>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="fullName">Full Name</Label>
-                    <Input 
-                      id="fullName" 
-                      type="text" 
-                      placeholder="John Doe"
-                      value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phoneNumber">Phone Number</Label>
-                    <Input 
-                      id="phoneNumber" 
-                      type="tel" 
-                      placeholder="+1234567890"
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="regEmail">Email</Label>
-                    <Input 
-                      id="regEmail" 
-                      type="email" 
-                      placeholder="your.email@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="regPassword">Password</Label>
-                    <Input 
-                      id="regPassword" 
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
+              <Form {...registerForm}>
+                <form onSubmit={registerForm.handleSubmit(handleSignUp)} className="space-y-4">
+                  <FormField
+                    control={registerForm.control}
+                    name="fullName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Full Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="John Doe"
+                            disabled={isLoading}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={registerForm.control}
+                    name="phoneNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone Number</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="+1234567890"
+                            disabled={isLoading}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={registerForm.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="your.email@example.com"
+                            type="email"
+                            disabled={isLoading}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={registerForm.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="password"
+                            disabled={isLoading}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? (
                       <>
@@ -170,8 +232,8 @@ const AuthPage = () => {
                       'Create account'
                     )}
                   </Button>
-                </div>
-              </form>
+                </form>
+              </Form>
             </TabsContent>
           </Tabs>
         </CardContent>
