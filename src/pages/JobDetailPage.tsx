@@ -27,7 +27,8 @@ const JobDetailPage = () => {
       // Add saved and applied status to the job
       setJob({
         ...foundJob,
-        isSaved: isJobSaved(foundJob.id)
+        isSaved: isJobSaved(foundJob.id),
+        isApplied: hasApplied(foundJob.id)
       });
     } else {
       setJob(null);
