@@ -2,9 +2,10 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Send } from 'lucide-react';
+import { CheckCircle, Send, Loader } from 'lucide-react';
 import { Job } from '@/types/job';
 import { useJobApplication } from '@/hooks/useJobApplication';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface JobApplicationProps {
   job: Job;
@@ -12,10 +13,11 @@ interface JobApplicationProps {
 }
 
 const JobApplication = ({ job, onJobUpdate }: JobApplicationProps) => {
-  const { applyForJob, hasApplied } = useJobApplication();
+  const { applyForJob, hasApplied, loading } = useJobApplication();
+  const { user } = useAuth();
   
-  const handleApply = () => {
-    const updatedJob = applyForJob(job);
+  const handleApply = async () => {
+    const updatedJob = await applyForJob(job);
     if (onJobUpdate) {
       onJobUpdate(updatedJob);
     }
@@ -34,7 +36,16 @@ const JobApplication = ({ job, onJobUpdate }: JobApplicationProps) => {
             : " Click the button below to submit your application. Make sure your resume is up to date and highlights relevant experience."
           }
         </p>
-        {applied ? (
+        {loading ? (
+          <Button 
+            size="lg" 
+            className="bg-gray-400 hover:bg-gray-500 w-full md:w-auto"
+            disabled
+          >
+            <Loader className="mr-2 h-4 w-4 animate-spin" />
+            Loading...
+          </Button>
+        ) : applied ? (
           <Button 
             size="lg" 
             className="bg-green-600 hover:bg-green-700 w-full md:w-auto"
@@ -52,6 +63,11 @@ const JobApplication = ({ job, onJobUpdate }: JobApplicationProps) => {
             <Send className="mr-2 h-4 w-4" />
             Apply for this Job
           </Button>
+        )}
+        {!user && !loading && (
+          <p className="mt-4 text-sm text-german-muted">
+            You need to be logged in to apply for jobs.
+          </p>
         )}
       </CardContent>
     </Card>

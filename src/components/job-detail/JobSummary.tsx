@@ -2,10 +2,11 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Bookmark, CheckCircle, Send } from 'lucide-react';
+import { Bookmark, CheckCircle, Send, Loader } from 'lucide-react';
 import { Job } from '@/types/job';
 import { useJobActions } from '@/hooks/useJobActions';
 import { useJobApplication } from '@/hooks/useJobApplication';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface JobSummaryProps {
   job: Job;
@@ -14,7 +15,8 @@ interface JobSummaryProps {
 
 const JobSummary = ({ job, onJobUpdate }: JobSummaryProps) => {
   const { toggleSaveJob, isJobSaved } = useJobActions();
-  const { applyForJob, hasApplied } = useJobApplication();
+  const { applyForJob, hasApplied, loading } = useJobApplication();
+  const { user } = useAuth();
   
   const handleSaveJob = () => {
     const updatedJob = toggleSaveJob(job);
@@ -23,8 +25,8 @@ const JobSummary = ({ job, onJobUpdate }: JobSummaryProps) => {
     }
   };
   
-  const handleApply = () => {
-    const updatedJob = applyForJob(job);
+  const handleApply = async () => {
+    const updatedJob = await applyForJob(job);
     if (onJobUpdate) {
       onJobUpdate(updatedJob);
     }
@@ -70,7 +72,12 @@ const JobSummary = ({ job, onJobUpdate }: JobSummaryProps) => {
         </div>
         
         <div className="mt-6 flex flex-col gap-3">
-          {applied ? (
+          {loading ? (
+            <Button className="bg-gray-400 hover:bg-gray-500 w-full" disabled>
+              <Loader className="mr-2 h-4 w-4 animate-spin" />
+              <span>Loading...</span>
+            </Button>
+          ) : applied ? (
             <Button className="bg-green-600 hover:bg-green-700 w-full" disabled>
               <CheckCircle className="mr-2 h-4 w-4" />
               <span>Application Submitted</span>
