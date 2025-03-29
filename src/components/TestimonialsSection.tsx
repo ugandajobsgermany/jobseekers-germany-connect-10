@@ -30,39 +30,39 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <section className="bg-gradient-to-b from-gray-50 to-white py-20">
+    <section className="bg-gradient-to-b from-gray-50 to-white py-12">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-german-dark mb-6">Success Stories</h2>
-          <div className="w-20 h-1 bg-german-primary mx-auto mb-6 rounded-full"></div>
-          <p className="text-german-muted max-w-2xl mx-auto text-lg">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-german-dark mb-4">Success Stories</h2>
+          <div className="w-16 h-1 bg-german-primary mx-auto mb-4 rounded-full"></div>
+          <p className="text-german-muted max-w-2xl mx-auto text-base">
             Hear from professionals who found their ideal careers in Germany through our platform
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {testimonials.map((testimonial) => (
             <Card 
               key={testimonial.id} 
-              className="relative border-none rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
+              className="relative border-none rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-german-primary to-german-secondary"></div>
-              <CardContent className="p-8 md:p-10 flex flex-col h-full">
-                <div className="mb-8">
-                  <div className="bg-gradient-to-br from-german-primary/20 to-german-primary/5 w-16 h-16 flex items-center justify-center rounded-full mb-6">
-                    <Quote className="h-8 w-8 text-german-primary" />
+              <CardContent className="p-4 flex flex-col h-full">
+                <div className="mb-4">
+                  <div className="bg-gradient-to-br from-german-primary/20 to-german-primary/5 w-10 h-10 flex items-center justify-center rounded-full mb-3">
+                    <Quote className="h-5 w-5 text-german-primary" />
                   </div>
-                  <p className="text-german-dark mb-6 italic leading-relaxed">"{testimonial.quote}"</p>
+                  <p className="text-german-dark text-sm italic leading-relaxed line-clamp-4">"{testimonial.quote}"</p>
                 </div>
-                <div className="flex items-center mt-auto pt-6 border-t border-gray-100">
-                  <Avatar className="h-16 w-16 mr-4 border-2 border-german-primary/20 shadow-sm">
-                    <AvatarFallback className="bg-gradient-to-br from-german-primary to-german-primary/80 text-white text-lg font-medium">
+                <div className="flex items-center mt-auto pt-3 border-t border-gray-100">
+                  <Avatar className="h-10 w-10 mr-3 border border-german-primary/20">
+                    <AvatarFallback className="bg-gradient-to-br from-german-primary to-german-primary/80 text-white text-xs">
                       {testimonial.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <h4 className="font-bold text-german-dark text-lg">{testimonial.name}</h4>
-                    <p className="text-german-muted">
+                    <h4 className="font-bold text-german-dark text-sm">{testimonial.name}</h4>
+                    <p className="text-german-muted text-xs">
                       {testimonial.position} at <span className="font-medium text-german-primary">{testimonial.company}</span>
                     </p>
                   </div>
