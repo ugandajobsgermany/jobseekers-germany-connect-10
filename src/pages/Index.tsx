@@ -10,10 +10,16 @@ import CompanySection from '@/components/CompanySection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import ResourcesSection from '@/components/ResourcesSection';
 import CallToAction from '@/components/CallToAction';
+import SEO from '@/components/SEO';
 
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="UgandajobsGermany - Connect with Top German Employers" 
+        description="UgandajobsGermany connects Ugandan talents with top employers in Germany. Find your dream job, visa information, and relocation resources."
+        canonical="https://ugandajobsgermany.online"
+      />
       <Header />
       <main className="flex-grow">
         <HeroSection />

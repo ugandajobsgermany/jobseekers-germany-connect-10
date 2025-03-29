@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import JobsPage from "./pages/JobsPage";
 import JobDetailPage from "./pages/JobDetailPage";
@@ -20,28 +21,30 @@ import FAQPage from "./pages/FAQPage";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/jobs" element={<JobsPage />} />
-          <Route path="/job/:id" element={<JobDetailPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/resources" element={<ResourcesPage />} />
-          <Route path="/resources/:id" element={<ResourceDetailPage />} />
-          <Route path="/visa-info" element={<VisaInfoPage />} />
-          <Route path="/relocation" element={<RelocationPage />} />
-          <Route path="/german-language" element={<GermanLanguagePage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </TooltipProvider>
-    </BrowserRouter>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/jobs" element={<JobsPage />} />
+            <Route path="/job/:id" element={<JobDetailPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/resources" element={<ResourcesPage />} />
+            <Route path="/resources/:id" element={<ResourceDetailPage />} />
+            <Route path="/visa-info" element={<VisaInfoPage />} />
+            <Route path="/relocation" element={<RelocationPage />} />
+            <Route path="/german-language" element={<GermanLanguagePage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </TooltipProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;
