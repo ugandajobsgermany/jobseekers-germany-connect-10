@@ -13,6 +13,8 @@ import SEO from '@/components/SEO'
 const AuthPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [fullName, setFullName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const { signIn, signUp, user } = useAuth()
   const navigate = useNavigate()
@@ -37,7 +39,7 @@ const AuthPage = () => {
     e.preventDefault()
     setIsLoading(true)
     try {
-      await signUp(email, password)
+      await signUp(email, password, fullName, phoneNumber)
     } finally {
       setIsLoading(false)
     }
@@ -112,9 +114,33 @@ const AuthPage = () => {
               <form onSubmit={handleSignUp}>
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="fullName">Full Name</Label>
                     <Input 
-                      id="email" 
+                      id="fullName" 
+                      type="text" 
+                      placeholder="John Doe"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      required
+                      disabled={isLoading}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phoneNumber">Phone Number</Label>
+                    <Input 
+                      id="phoneNumber" 
+                      type="tel" 
+                      placeholder="+1234567890"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      required
+                      disabled={isLoading}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="regEmail">Email</Label>
+                    <Input 
+                      id="regEmail" 
                       type="email" 
                       placeholder="your.email@example.com"
                       value={email}
@@ -124,9 +150,9 @@ const AuthPage = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="regPassword">Password</Label>
                     <Input 
-                      id="password" 
+                      id="regPassword" 
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
