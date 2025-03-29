@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,7 +9,7 @@ interface JobCardProps {
   id: string;
   title: string;
   company: string;
-  companyLogo?: string; // Changed to optional to match Job interface
+  companyLogo?: string;
   location: string;
   salary: string;
   jobType: string;
@@ -32,9 +32,16 @@ const JobCard = ({
   isFeatured = false,
   isSaved = false
 }: JobCardProps) => {
+  const [imageError, setImageError] = useState(false);
+  
   // Handle image loading errors
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = 'https://via.placeholder.com/48?text=' + company.charAt(0);
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
+  // Create initials from company name for fallback
+  const getInitials = (name: string) => {
+    return name.charAt(0).toUpperCase();
   };
 
   return (
@@ -49,7 +56,7 @@ const JobCard = ({
           
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0 w-12 h-12 bg-gray-100 rounded-md overflow-hidden flex items-center justify-center">
-              {companyLogo ? (
+              {companyLogo && !imageError ? (
                 <img 
                   src={companyLogo} 
                   alt={`${company} logo`} 
@@ -57,7 +64,9 @@ const JobCard = ({
                   onError={handleImageError}
                 />
               ) : (
-                <Briefcase className="h-6 w-6 text-gray-400" />
+                <div className="w-full h-full flex items-center justify-center bg-german-primary text-white font-semibold text-lg">
+                  {getInitials(company)}
+                </div>
               )}
             </div>
             
