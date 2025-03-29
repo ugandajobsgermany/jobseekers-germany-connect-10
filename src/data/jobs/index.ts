@@ -8,6 +8,10 @@ import { salesJobs } from './salesJobs';
 import { educationJobs } from './educationJobs';
 import { operationsJobs } from './operationsJobs';
 import { hrJobs } from './hrJobs';
+import { generalLaborJobs } from './generalLaborJobs';
+import { hospitalityServiceJobs } from './hospitalityServiceJobs';
+import { careSupportJobs } from './careSupportJobs';
+import { retailCustomerServiceJobs } from './retailCustomerServiceJobs';
 import { Job } from '@/types/job';
 
 // Combine all job categories into a single array
@@ -20,5 +24,9 @@ export const mockJobs: Job[] = [
   ...salesJobs,
   ...educationJobs,
   ...operationsJobs,
-  ...hrJobs
+  ...hrJobs,
+  ...generalLaborJobs,
+  ...hospitalityServiceJobs,
+  ...careSupportJobs,
+  ...retailCustomerServiceJobs
 ];
