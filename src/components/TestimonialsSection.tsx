@@ -30,39 +30,43 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <section className="bg-gradient-to-b from-gray-50 to-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-german-dark mb-4">Success Stories</h2>
-          <div className="w-16 h-1 bg-german-primary mx-auto mb-4 rounded-full"></div>
-          <p className="text-german-muted max-w-2xl mx-auto text-base">
-            Hear from professionals who found their ideal careers in Germany through our platform
+    <section className="bg-gradient-to-b from-gray-50 to-white py-8">
+      <div className="container mx-auto px-3">
+        <div className="text-center mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-german-dark mb-2">Success Stories</h2>
+          <div className="w-12 h-0.5 bg-german-primary mx-auto mb-2 rounded-full"></div>
+          <p className="text-german-muted max-w-xl mx-auto text-sm">
+            Hear from professionals who found their ideal careers in Germany
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {testimonials.map((testimonial) => (
+        <div className="grid grid-cols-3 gap-3 max-w-4xl mx-auto">
+          {testimonials.map((testimonial, index) => (
             <Card 
               key={testimonial.id} 
-              className="relative border-none rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+              className="relative border-none rounded-lg shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 overflow-hidden animate-fade-in"
+              style={{ 
+                animationDelay: `${index * 100}ms`,
+                animationFillMode: 'both'
+              }}
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-german-primary to-german-secondary"></div>
-              <CardContent className="p-4 flex flex-col h-full">
-                <div className="mb-4">
-                  <div className="bg-gradient-to-br from-german-primary/20 to-german-primary/5 w-10 h-10 flex items-center justify-center rounded-full mb-3">
-                    <Quote className="h-5 w-5 text-german-primary" />
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-german-primary to-german-secondary"></div>
+              <CardContent className="p-3 flex flex-col h-full">
+                <div className="mb-2">
+                  <div className="bg-gradient-to-br from-german-primary/10 to-german-primary/5 w-6 h-6 flex items-center justify-center rounded-full mb-2">
+                    <Quote className="h-3 w-3 text-german-primary" />
                   </div>
-                  <p className="text-german-dark text-sm italic leading-relaxed line-clamp-4">"{testimonial.quote}"</p>
+                  <p className="text-german-dark text-xs italic leading-relaxed line-clamp-3">"{testimonial.quote}"</p>
                 </div>
-                <div className="flex items-center mt-auto pt-3 border-t border-gray-100">
-                  <Avatar className="h-10 w-10 mr-3 border border-german-primary/20">
-                    <AvatarFallback className="bg-gradient-to-br from-german-primary to-german-primary/80 text-white text-xs">
+                <div className="flex items-center mt-auto pt-2 border-t border-gray-100">
+                  <Avatar className="h-6 w-6 mr-2 border border-german-primary/20">
+                    <AvatarFallback className="bg-gradient-to-br from-german-primary to-german-primary/80 text-white text-[10px]">
                       {testimonial.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <h4 className="font-bold text-german-dark text-sm">{testimonial.name}</h4>
-                    <p className="text-german-muted text-xs">
+                    <h4 className="font-bold text-german-dark text-xs">{testimonial.name}</h4>
+                    <p className="text-german-muted text-[10px]">
                       {testimonial.position} at <span className="font-medium text-german-primary">{testimonial.company}</span>
                     </p>
                   </div>
