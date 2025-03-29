@@ -30,16 +30,11 @@ const Header = () => {
             </Link>
           </nav>
           
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center">
             <Button variant="outline" size="sm" className="flex items-center gap-1">
               <User className="h-4 w-4" />
               <span>Login</span>
             </Button>
-            <Link to="/post-job">
-              <Button className="bg-german-primary hover:bg-german-primary/90" size="sm">
-                Post a Job
-              </Button>
-            </Link>
           </div>
           
           <div className="md:hidden flex items-center">
@@ -78,11 +73,6 @@ const Header = () => {
                 <User className="h-4 w-4 mr-2" />
                 Login
               </Button>
-              <Link to="/post-job" className="w-full">
-                <Button className="bg-german-primary hover:bg-german-primary/90 w-full justify-start">
-                  Post a Job
-                </Button>
-              </Link>
             </div>
           </nav>
         </div>
