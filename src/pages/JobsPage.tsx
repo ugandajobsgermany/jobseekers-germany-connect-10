@@ -9,6 +9,7 @@ import { mockJobs } from '@/data/jobs';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, ListFilter, X } from 'lucide-react';
 import SEO from '@/components/SEO';
+import JobListSchema from '@/components/SEO/JobListSchema';
 
 const JobsPage = () => {
   const [filteredJobs, setFilteredJobs] = useState(mockJobs);
@@ -30,6 +31,9 @@ const JobsPage = () => {
         canonical="https://ugandajobsgermany.online/jobs"
         ogType="website"
       />
+      {/* Add structured data for job listings */}
+      <JobListSchema jobs={filteredJobs.slice(0, 10)} />
+      
       <Header />
       <main className="flex-grow bg-gray-50">
         <div className="container mx-auto py-8">

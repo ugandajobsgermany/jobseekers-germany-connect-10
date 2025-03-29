@@ -14,6 +14,7 @@ import { Job } from '@/types/job';
 import { useJobActions } from '@/hooks/useJobActions';
 import { useJobApplication } from '@/hooks/useJobApplication';
 import SEO from '@/components/SEO';
+import JobPostingSchema from '@/components/SEO/JobPostingSchema';
 
 const JobDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -59,6 +60,9 @@ const JobDetailPage = () => {
         canonical={`https://ugandajobsgermany.online/job/${id}`}
         ogType="article"
       />
+      {/* Add structured data for job posting */}
+      <JobPostingSchema job={job} />
+      
       <Header />
       <main className="flex-grow bg-gray-50 py-8">
         <div className="container mx-auto">

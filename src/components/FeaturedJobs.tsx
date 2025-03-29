@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import JobCard from './JobCard';
+import JobListSchema from './SEO/JobListSchema';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -40,54 +41,59 @@ const FeaturedJobs = () => {
   }, [sortOrder]);
 
   return (
-    <section className="container mx-auto py-8 md:py-10">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h2 className="text-2xl font-bold text-german-dark mb-1">Featured Jobs</h2>
-          <p className="text-german-muted text-sm">Handpicked opportunities from top German companies</p>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className={`text-sm ${sortOrder === 'newest' ? 'bg-german-light' : ''}`}
-              onClick={() => setSortOrder('newest')}
-            >
-              Newest
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className={`text-sm ${sortOrder === 'oldest' ? 'bg-german-light' : ''}`}
-              onClick={() => setSortOrder('oldest')}
-            >
-              Oldest
-            </Button>
+    <>
+      {/* Add structured data for featured job listings */}
+      <JobListSchema jobs={jobs} />
+      
+      <section className="container mx-auto py-8 md:py-10">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-german-dark mb-1">Featured Jobs</h2>
+            <p className="text-german-muted text-sm">Handpicked opportunities from top German companies</p>
           </div>
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className={`text-sm ${sortOrder === 'newest' ? 'bg-german-light' : ''}`}
+                onClick={() => setSortOrder('newest')}
+              >
+                Newest
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className={`text-sm ${sortOrder === 'oldest' ? 'bg-german-light' : ''}`}
+                onClick={() => setSortOrder('oldest')}
+              >
+                Oldest
+              </Button>
+            </div>
+            <Link to="/jobs">
+              <Button variant="outline" className="hidden md:flex items-center gap-2 text-sm py-1 px-3 h-8">
+                <span>View All Jobs</span>
+                <ArrowRight className="h-3 w-3" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {jobs.map((job) => (
+            <JobCard key={job.id} {...job} />
+          ))}
+        </div>
+        
+        <div className="mt-6 flex justify-center md:hidden">
           <Link to="/jobs">
-            <Button variant="outline" className="hidden md:flex items-center gap-2 text-sm py-1 px-3 h-8">
-              <span>View All Jobs</span>
-              <ArrowRight className="h-3 w-3" />
+            <Button className="bg-german-primary hover:bg-german-primary/90 text-sm py-1 px-3 h-8">
+              View All Jobs
             </Button>
           </Link>
         </div>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {jobs.map((job) => (
-          <JobCard key={job.id} {...job} />
-        ))}
-      </div>
-      
-      <div className="mt-6 flex justify-center md:hidden">
-        <Link to="/jobs">
-          <Button className="bg-german-primary hover:bg-german-primary/90 text-sm py-1 px-3 h-8">
-            View All Jobs
-          </Button>
-        </Link>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
