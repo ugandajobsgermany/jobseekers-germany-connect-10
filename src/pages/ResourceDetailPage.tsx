@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { resources } from '@/data/resourceData';
+import resourceData from '@/data/resourceData';
 import { ChevronRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -10,10 +10,10 @@ import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
 
 const ResourceDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [resource, setResource] = useState(resources.find(r => r.id === id));
+  const [resource, setResource] = useState(resourceData.find(r => r.id === id));
   
   useEffect(() => {
-    setResource(resources.find(r => r.id === id));
+    setResource(resourceData.find(r => r.id === id));
     window.scrollTo(0, 0);
   }, [id]);
   
