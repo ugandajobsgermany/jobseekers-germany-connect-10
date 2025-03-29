@@ -4,10 +4,17 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const NotFound = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="404 - Page Not Found"
+        description="The page you are looking for could not be found. Please check the URL or navigate back to the homepage."
+        canonical="https://ugandajobsgermany.online"
+        noIndex={true}
+      />
       <Header />
       <main className="flex-grow flex items-center justify-center bg-gray-50 py-16">
         <div className="container mx-auto text-center px-4">

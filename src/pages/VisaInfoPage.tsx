@@ -3,10 +3,18 @@ import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import SEO from '@/components/SEO';
 
 const VisaInfoPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="German Visa Information for Ugandans"
+        description="Complete guide to German visa requirements, application processes, and immigration procedures specifically for Ugandan citizens. Learn about the EU Blue Card, work permits and more."
+        keywords="German visa, Uganda immigration Germany, EU Blue Card Uganda, work permit Germany, skilled workers visa, German residence permit"
+        canonical="https://ugandajobsgermany.online/visa-info"
+        ogType="article"
+      />
       <Header />
       <main className="flex-grow">
         <div className="bg-german-primary text-white py-16">

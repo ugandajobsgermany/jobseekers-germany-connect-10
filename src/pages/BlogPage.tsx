@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Calendar, User, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO';
 
 const blogCategories = [
   { id: 'all', name: 'All Posts' },
@@ -142,6 +143,13 @@ const blogPosts = [
 const BlogPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Career Blog for Ugandan Professionals in Germany"
+        description="Expert advice, tips and insights for Ugandan professionals looking to work in Germany. Explore articles on visa processes, work culture, language learning and more."
+        keywords="career advice Germany, visa tips Uganda, German work culture, expat blog Germany, Ugandan professionals Europe"
+        canonical="https://ugandajobsgermany.online/blog"
+        ogType="website"
+      />
       <Header />
       <main className="flex-grow">
         <div className="bg-german-primary text-white py-16">

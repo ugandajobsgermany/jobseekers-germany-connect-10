@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import resourceData from '@/data/resourceData';
+import SEO from '@/components/SEO';
 
 const ResourceDetailPage = () => {
   const { id } = useParams();
@@ -14,6 +15,12 @@ const ResourceDetailPage = () => {
   if (!resource) {
     return (
       <div className="min-h-screen flex flex-col">
+        <SEO 
+          title="Resource Not Found"
+          description="The requested resource could not be found. Browse our other resources for information on working and living in Germany."
+          canonical="https://ugandajobsgermany.online/resources"
+          noIndex={true}
+        />
         <Header />
         <main className="flex-grow container mx-auto py-12 px-4">
           <Link to="/resources" className="inline-flex items-center text-german-primary mb-8">
@@ -37,6 +44,13 @@ const ResourceDetailPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title={`${resource.title} - UgandajobsGermany Resource`}
+        description={`Detailed information about ${resource.title.toLowerCase()} for Ugandans planning to work and live in Germany.`}
+        keywords={`${resource.title.toLowerCase()}, Germany resources, Ugandan professionals, ${resource.category}`}
+        canonical={`https://ugandajobsgermany.online/resources/${id}`}
+        ogType="article"
+      />
       <Header />
       <main className="flex-grow">
         <div className="bg-german-primary text-white py-8">

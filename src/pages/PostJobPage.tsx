@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent } from '@/components/ui/card';
+import SEO from '@/components/SEO';
 
 const PostJobPage = () => {
   const navigate = useNavigate();
@@ -61,6 +62,13 @@ const PostJobPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Post a Job - Hire Ugandan Talent in Germany"
+        description="Post job opportunities for Ugandan professionals in Germany. Reach qualified candidates with expertise in IT, engineering, healthcare, finance, and more."
+        keywords="post job Germany, hire Ugandan talent, job posting, employer Germany, international recruitment, talent acquisition"
+        canonical="https://ugandajobsgermany.online/post-job"
+        ogType="website"
+      />
       <Header />
       <main className="flex-grow bg-gray-50 py-12">
         <div className="container mx-auto px-4">

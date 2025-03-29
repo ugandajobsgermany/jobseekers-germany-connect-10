@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -7,6 +6,7 @@ import { FileText, MapPin, GraduationCap, Home, CreditCard, FileCheck, Building,
 import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
+import SEO from '@/components/SEO';
 
 const resourceCategories = [
   {
@@ -145,6 +145,13 @@ const resources = [
 const ResourcesPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Resources for Ugandans Moving to Germany"
+        description="Comprehensive resources for Ugandans planning to relocate to Germany. Find guides on visas, housing, language learning, and more to make your transition smoother."
+        keywords="Germany relocation resources, moving to Germany, visa guides, German housing, language resources, expat support Uganda"
+        canonical="https://ugandajobsgermany.online/resources"
+        ogType="website"
+      />
       <Header />
       <main className="flex-grow">
         <section className="bg-german-primary text-white py-12">

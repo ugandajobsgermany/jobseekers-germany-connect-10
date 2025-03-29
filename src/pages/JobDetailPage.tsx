@@ -13,6 +13,7 @@ import { mockJobs } from '@/data/jobs';
 import { Job } from '@/types/job';
 import { useJobActions } from '@/hooks/useJobActions';
 import { useJobApplication } from '@/hooks/useJobApplication';
+import SEO from '@/components/SEO';
 
 const JobDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -40,7 +41,9 @@ const JobDetailPage = () => {
   };
   
   if (!job) {
-    return <JobNotFound />;
+    return (
+      <JobNotFound />
+    );
   }
   
   const similarJobs = mockJobs
@@ -49,6 +52,13 @@ const JobDetailPage = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title={`${job.title} at ${job.company} - Job Details`}
+        description={`${job.title} job opportunity at ${job.company}. ${job.location}. ${job.jobType}. Salary range: ${job.salary}.`}
+        keywords={`${job.title}, ${job.company}, Germany jobs, ${job.category} jobs, work in Germany, Ugandan professionals`}
+        canonical={`https://ugandajobsgermany.online/job/${id}`}
+        ogType="article"
+      />
       <Header />
       <main className="flex-grow bg-gray-50 py-8">
         <div className="container mx-auto">

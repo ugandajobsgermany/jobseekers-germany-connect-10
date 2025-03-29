@@ -8,6 +8,7 @@ import SearchBar from '@/components/SearchBar';
 import { mockJobs } from '@/data/jobs';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, ListFilter, X } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const JobsPage = () => {
   const [filteredJobs, setFilteredJobs] = useState(mockJobs);
@@ -22,6 +23,13 @@ const JobsPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Browse Jobs in Germany for Ugandan Professionals"
+        description="Explore job opportunities in Germany specifically curated for Ugandan professionals. Filter by industry, location, and experience level to find your ideal position."
+        keywords="Germany jobs, Ugandan professionals Germany, work in Germany, international jobs, EU employment, career opportunities"
+        canonical="https://ugandajobsgermany.online/jobs"
+        ogType="website"
+      />
       <Header />
       <main className="flex-grow bg-gray-50">
         <div className="container mx-auto py-8">

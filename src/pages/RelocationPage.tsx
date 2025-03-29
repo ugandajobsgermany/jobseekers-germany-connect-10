@@ -1,9 +1,9 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, Clock, Calendar, Home, CreditCard, Globe, FileText, Phone, ShieldCheck, Mailbox } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const steps = [
   {
@@ -110,6 +110,13 @@ const essentials = [
 const RelocationPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Relocation Guide: Moving from Uganda to Germany"
+        description="Comprehensive step-by-step guide to relocating from Uganda to Germany. Learn about pre-departure preparations, first steps after arrival, housing, banking, and cultural adaptation."
+        keywords="Germany relocation, moving to Germany from Uganda, expat guide Germany, settling in Germany, German cultural tips, international relocation"
+        canonical="https://ugandajobsgermany.online/relocation"
+        ogType="article"
+      />
       <Header />
       <main className="flex-grow">
         <div className="bg-german-primary text-white py-16">
