@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -84,11 +83,11 @@ const AboutPage = () => {
                 </div>
                 <div className="flex items-center">
                   <Users className="h-5 w-5 mr-2 text-german-primary" />
-                  <span>Phone: +49 30 1234 5678</span>
+                  <span>Phone: +4915214636946</span>
                 </div>
                 <div className="flex items-center">
                   <Award className="h-5 w-5 mr-2 text-german-primary" />
-                  <span>Email: contact@ugandajobsgermany.com</span>
+                  <span>Email: ugandajobsgermany@gmail.com</span>
                 </div>
               </div>
             </div>
