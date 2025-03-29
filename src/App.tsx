@@ -5,6 +5,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { AuthProvider } from "@/contexts/AuthContext";
+import AuthGuard from "@/components/AuthGuard";
+import AuthPage from "@/pages/AuthPage";
 import Index from "./pages/Index";
 import JobsPage from "./pages/JobsPage";
 import JobDetailPage from "./pages/JobDetailPage";
@@ -23,26 +26,29 @@ const queryClient = new QueryClient();
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/jobs" element={<JobsPage />} />
-            <Route path="/job/:id" element={<JobDetailPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/resources/:id" element={<ResourceDetailPage />} />
-            <Route path="/visa-info" element={<VisaInfoPage />} />
-            <Route path="/relocation" element={<RelocationPage />} />
-            <Route path="/german-language" element={<GermanLanguagePage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </TooltipProvider>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/" element={<AuthGuard><Index /></AuthGuard>} />
+              <Route path="/jobs" element={<AuthGuard><JobsPage /></AuthGuard>} />
+              <Route path="/job/:id" element={<AuthGuard><JobDetailPage /></AuthGuard>} />
+              <Route path="/about" element={<AuthGuard><AboutPage /></AuthGuard>} />
+              <Route path="/resources" element={<AuthGuard><ResourcesPage /></AuthGuard>} />
+              <Route path="/resources/:id" element={<AuthGuard><ResourceDetailPage /></AuthGuard>} />
+              <Route path="/visa-info" element={<AuthGuard><VisaInfoPage /></AuthGuard>} />
+              <Route path="/relocation" element={<AuthGuard><RelocationPage /></AuthGuard>} />
+              <Route path="/german-language" element={<AuthGuard><GermanLanguagePage /></AuthGuard>} />
+              <Route path="/blog" element={<AuthGuard><BlogPage /></AuthGuard>} />
+              <Route path="/faq" element={<AuthGuard><FAQPage /></AuthGuard>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </TooltipProvider>
+        </BrowserRouter>
+      </AuthProvider>
     </QueryClientProvider>
   </HelmetProvider>
 );
