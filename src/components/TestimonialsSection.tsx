@@ -44,23 +44,24 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial) => (
             <Card 
               key={testimonial.id} 
-              className="border-none rounded-xl shadow-md h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              className="relative border-none rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
             >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-german-primary to-german-secondary"></div>
               <CardContent className="p-8 md:p-10 flex flex-col h-full">
                 <div className="mb-8">
-                  <div className="bg-german-primary/10 w-16 h-16 flex items-center justify-center rounded-full mb-6 mx-auto">
+                  <div className="bg-gradient-to-br from-german-primary/20 to-german-primary/5 w-16 h-16 flex items-center justify-center rounded-full mb-6">
                     <Quote className="h-8 w-8 text-german-primary" />
                   </div>
-                  <p className="text-german-dark mb-6 italic leading-relaxed text-center">"{testimonial.quote}"</p>
+                  <p className="text-german-dark mb-6 italic leading-relaxed">"{testimonial.quote}"</p>
                 </div>
-                <div className="flex flex-col items-center mt-auto pt-6 border-t border-gray-100">
-                  <Avatar className="h-16 w-16 mb-4 border-2 border-german-primary/20">
-                    <AvatarFallback className="bg-german-primary text-white text-lg">
+                <div className="flex items-center mt-auto pt-6 border-t border-gray-100">
+                  <Avatar className="h-16 w-16 mr-4 border-2 border-german-primary/20 shadow-sm">
+                    <AvatarFallback className="bg-gradient-to-br from-german-primary to-german-primary/80 text-white text-lg font-medium">
                       {testimonial.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
-                  <div className="text-center">
-                    <h4 className="font-semibold text-german-dark text-lg">{testimonial.name}</h4>
+                  <div>
+                    <h4 className="font-bold text-german-dark text-lg">{testimonial.name}</h4>
                     <p className="text-german-muted">
                       {testimonial.position} at <span className="font-medium text-german-primary">{testimonial.company}</span>
                     </p>
