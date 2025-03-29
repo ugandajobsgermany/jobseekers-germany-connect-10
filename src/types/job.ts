@@ -13,4 +13,5 @@ export interface Job {
   requirements: string[];
   benefits: string[];
   isSaved?: boolean;
+  isApplied?: boolean;
 }
