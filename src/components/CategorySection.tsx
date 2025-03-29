@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { CodeIcon, HeartPulse, LightbulbIcon, LineChart, GraduationCap, ShoppingBag, Settings } from 'lucide-react';
+import { CodeIcon, HeartPulse, LightbulbIcon, LineChart, GraduationCap, ShoppingBag, Settings, Hotel } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const categories = [
@@ -39,6 +39,13 @@ const categories = [
     icon: LineChart,
     count: 143,
     color: 'bg-green-100 text-green-600'
+  },
+  {
+    id: 'hospitality',
+    name: 'Hospitality',
+    icon: Hotel,
+    count: 124,
+    color: 'bg-amber-100 text-amber-600'
   },
   {
     id: 'education',
