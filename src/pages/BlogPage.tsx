@@ -19,123 +19,123 @@ const blogCategories = [
 const blogPosts = [
   {
     id: 1,
-    title: 'Understanding the EU Blue Card Requirements in 2023',
-    excerpt: 'The EU Blue Card is one of the most sought-after work permits for highly skilled professionals moving to Germany. This article breaks down the latest requirements, salary thresholds, and application process.',
-    date: 'June 15, 2023',
-    author: 'Maria Schmidt',
-    category: 'visa',
-    readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1512075135822-67cdd9dd7314?q=80&w=600&auto=format&fit=crop'
+    title: "Understanding the EU Blue Card Requirements in 2023",
+    excerpt: "The EU Blue Card is one of the most sought-after work permits for highly skilled professionals moving to Germany. This article breaks down the latest requirements, salary thresholds, and application process.",
+    date: "June 15, 2023",
+    author: "Maria Schmidt",
+    category: "visa",
+    readTime: "8 min read",
+    image: "https://images.unsplash.com/photo-1512075135822-67cdd9dd7314?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 2,
-    title: 'How to Create a German-Style CV That Gets Noticed',
-    excerpt: 'German CVs follow specific formatting and content standards that might differ from what you're used to. Learn how to adapt your resume to increase your chances of landing interviews with German employers.',
-    date: 'May 23, 2023',
-    author: 'Thomas Weber',
-    category: 'career',
-    readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=600&auto=format&fit=crop'
+    title: "How to Create a German-Style CV That Gets Noticed",
+    excerpt: "German CVs follow specific formatting and content standards that might differ from what you're used to. Learn how to adapt your resume to increase your chances of landing interviews with German employers.",
+    date: "May 23, 2023",
+    author: "Thomas Weber",
+    category: "career",
+    readTime: "6 min read",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 3,
-    title: '10 German Phrases Every Professional Should Know',
-    excerpt: 'Even if your job doesn't require fluent German, knowing these key professional phrases can help you navigate workplace situations and make a great impression on your German colleagues.',
-    date: 'April 10, 2023',
-    author: 'Anna Müller',
-    category: 'language',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1555431189-0fabf2667795?q=80&w=600&auto=format&fit=crop'
+    title: "10 German Phrases Every Professional Should Know",
+    excerpt: "Even if your job doesn't require fluent German, knowing these key professional phrases can help you navigate workplace situations and make a great impression on your German colleagues.",
+    date: "April 10, 2023",
+    author: "Anna Müller",
+    category: "language",
+    readTime: "5 min read",
+    image: "https://images.unsplash.com/photo-1555431189-0fabf2667795?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 4,
-    title: 'Navigating German Work Culture: Unwritten Rules',
-    excerpt: 'German workplace culture has its own set of unspoken expectations that can be confusing for international professionals. This guide helps you understand these cultural nuances to integrate more smoothly.',
-    date: 'March 28, 2023',
-    author: 'David Schneider',
-    category: 'culture',
-    readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1577412647305-991150c7d163?q=80&w=600&auto=format&fit=crop'
+    title: "Navigating German Work Culture: Unwritten Rules",
+    excerpt: "German workplace culture has its own set of unspoken expectations that can be confusing for international professionals. This guide helps you understand these cultural nuances to integrate more smoothly.",
+    date: "March 28, 2023",
+    author: "David Schneider",
+    category: "culture",
+    readTime: "7 min read",
+    image: "https://images.unsplash.com/photo-1577412647305-991150c7d163?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 5,
-    title: 'Finding Affordable Housing in Berlin: A Comprehensive Guide',
-    excerpt: 'Berlin's housing market is notoriously competitive. This article provides practical tips, resources, and strategies to help you find an affordable apartment in Germany's capital city.',
-    date: 'February 15, 2023',
-    author: 'Sophie Wagner',
-    category: 'lifestyle',
-    readTime: '9 min read',
-    image: 'https://images.unsplash.com/photo-1560840067-ddcaeb7831d2?q=80&w=600&auto=format&fit=crop'
+    title: "Finding Affordable Housing in Berlin: A Comprehensive Guide",
+    excerpt: "Berlin's housing market is notoriously competitive. This article provides practical tips, resources, and strategies to help you find an affordable apartment in Germany's capital city.",
+    date: "February 15, 2023",
+    author: "Sophie Wagner",
+    category: "lifestyle",
+    readTime: "9 min read",
+    image: "https://images.unsplash.com/photo-1560840067-ddcaeb7831d2?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 6,
-    title: 'The German Pension System Explained for Foreigners',
-    excerpt: 'Understanding how the German pension system works is crucial for planning your long-term financial future in the country. This guide breaks down the complicated system into digestible information.',
-    date: 'January 30, 2023',
-    author: 'Klaus Fischer',
-    category: 'lifestyle',
-    readTime: '10 min read',
-    image: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?q=80&w=600&auto=format&fit=crop'
+    title: "The German Pension System Explained for Foreigners",
+    excerpt: "Understanding how the German pension system works is crucial for planning your long-term financial future in the country. This guide breaks down the complicated system into digestible information.",
+    date: "January 30, 2023",
+    author: "Klaus Fischer",
+    category: "lifestyle",
+    readTime: "10 min read",
+    image: "https://images.unsplash.com/photo-1434626881859-194d67b2b86f?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 7,
-    title: 'Interview Success: How to Impress German Employers',
-    excerpt: 'German job interviews often differ from those in other countries. Learn about common questions, cultural expectations, and how to present yourself professionally to German hiring managers.',
-    date: 'December 12, 2022',
-    author: 'Julia Hoffmann',
-    category: 'career',
-    readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1533749871411-5e21e14bcc7d?q=80&w=600&auto=format&fit=crop'
+    title: "Interview Success: How to Impress German Employers",
+    excerpt: "German job interviews often differ from those in other countries. Learn about common questions, cultural expectations, and how to present yourself professionally to German hiring managers.",
+    date: "December 12, 2022",
+    author: "Julia Hoffmann",
+    category: "career",
+    readTime: "7 min read",
+    image: "https://images.unsplash.com/photo-1533749871411-5e21e14bcc7d?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 8,
-    title: 'Self-Employment in Germany: A Guide for Freelancers',
-    excerpt: 'Considering working as a freelancer in Germany? This comprehensive guide covers visa requirements, registration process, taxes, health insurance, and other essential information for self-employed professionals.',
-    date: 'November 5, 2022',
-    author: 'Martin Bauer',
-    category: 'visa',
-    readTime: '11 min read',
-    image: 'https://images.unsplash.com/photo-1617529497471-9218633199c0?q=80&w=600&auto=format&fit=crop'
+    title: "Self-Employment in Germany: A Guide for Freelancers",
+    excerpt: "Considering working as a freelancer in Germany? This comprehensive guide covers visa requirements, registration process, taxes, health insurance, and other essential information for self-employed professionals.",
+    date: "November 5, 2022",
+    author: "Martin Bauer",
+    category: "visa",
+    readTime: "11 min read",
+    image: "https://images.unsplash.com/photo-1617529497471-9218633199c0?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 9,
-    title: 'German Language Apps: Which One is Right for You?',
-    excerpt: 'With so many language learning apps available, it can be hard to choose the right one for your needs. This comparative review evaluates the most popular German language apps based on various learning styles.',
-    date: 'October 18, 2022',
-    author: 'Nina Schulz',
-    category: 'language',
-    readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1612787662393-5be6cd4c8fb3?q=80&w=600&auto=format&fit=crop'
+    title: "German Language Apps: Which One is Right for You?",
+    excerpt: "With so many language learning apps available, it can be hard to choose the right one for your needs. This comparative review evaluates the most popular German language apps based on various learning styles.",
+    date: "October 18, 2022",
+    author: "Nina Schulz",
+    category: "language",
+    readTime: "6 min read",
+    image: "https://images.unsplash.com/photo-1612787662393-5be6cd4c8fb3?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 10,
-    title: 'Work-Life Balance: How Germans Do It Right',
-    excerpt: 'Germany is known for its healthy approach to work-life balance. Discover the cultural attitudes, legal protections, and practices that contribute to this balance and how you can incorporate them into your life.',
-    date: 'September 22, 2022',
-    author: 'Laura Zimmermann',
-    category: 'culture',
-    readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd064a?q=80&w=600&auto=format&fit=crop'
+    title: "Work-Life Balance: How Germans Do It Right",
+    excerpt: "Germany is known for its healthy approach to work-life balance. Discover the cultural attitudes, legal protections, and practices that contribute to this balance and how you can incorporate them into your life.",
+    date: "September 22, 2022",
+    author: "Laura Zimmermann",
+    category: "culture",
+    readTime: "8 min read",
+    image: "https://images.unsplash.com/photo-1529333166437-7750a6dd064a?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 11,
-    title: 'Recognition of Foreign Qualifications in Germany',
-    excerpt: 'Having your foreign qualifications recognized is often essential for working in Germany, especially in regulated professions. Learn about the process, requirements, and resources available to help you.',
-    date: 'August 9, 2022',
-    author: 'Robert Meyer',
-    category: 'career',
-    readTime: '9 min read',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop'
+    title: "Recognition of Foreign Qualifications in Germany",
+    excerpt: "Having your foreign qualifications recognized is often essential for working in Germany, especially in regulated professions. Learn about the process, requirements, and resources available to help you.",
+    date: "August 9, 2022",
+    author: "Robert Meyer",
+    category: "career",
+    readTime: "9 min read",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop"
   },
   {
     id: 12,
-    title: 'German Health Insurance System: Public vs. Private',
-    excerpt: 'Choosing between public and private health insurance is one of the most important decisions you'll make when moving to Germany. This comparison helps you understand the pros and cons of each option.',
-    date: 'July 15, 2022',
-    author: 'Christina Koch',
-    category: 'lifestyle',
-    readTime: '10 min read',
-    image: 'https://images.unsplash.com/photo-1612277795421-9bc7706a4a41?q=80&w=600&auto=format&fit=crop'
+    title: "German Health Insurance System: Public vs. Private",
+    excerpt: "Choosing between public and private health insurance is one of the most important decisions you'll make when moving to Germany. This comparison helps you understand the pros and cons of each option.",
+    date: "July 15, 2022",
+    author: "Christina Koch",
+    category: "lifestyle",
+    readTime: "10 min read",
+    image: "https://images.unsplash.com/photo-1612277795421-9bc7706a4a41?q=80&w=600&auto=format&fit=crop"
   }
 ];
 
