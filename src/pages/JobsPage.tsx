@@ -23,19 +23,42 @@ const JobsPage = () => {
     location: 'any',
     category: 'all'
   });
+  
+  // Extract unique categories, jobTypes, etc. from all jobs for filters
+  const uniqueCategories = [...new Set(allJobs.map(job => job.category))];
+  const uniqueJobTypes = [...new Set(allJobs.map(job => job.jobType))];
+  const uniqueLocations = [...new Set(allJobs.map(job => job.location))];
+  
+  // Filter state that combines search and sidebar filters
   const [filterCriteria, setFilterCriteria] = useState({
     jobTypes: [] as string[],
     experienceLevels: [] as string[],
     salary: [0, 120000],
     postDate: 'any_time',
-    locations: [] as string[]
+    locations: [] as string[],
+    categories: [] as string[]
   });
   
   const jobsPerPage = 10;
   
   // Handle search from SearchBar
   const handleSearch = (criteria: any) => {
+    // Update search criteria
     setSearchCriteria(criteria);
+    
+    // Update filter criteria based on search
+    setFilterCriteria(prev => ({
+      ...prev,
+      // If specific location is selected in search, update locations filter
+      locations: criteria.location !== 'any' 
+        ? [criteria.location] 
+        : prev.locations,
+      // If specific category is selected in search, update categories filter
+      categories: criteria.category !== 'all' 
+        ? [criteria.category] 
+        : prev.categories
+    }));
+    
     setCurrentPage(1); // Reset to first page on new search
   };
   
@@ -64,45 +87,57 @@ const JobsPage = () => {
       );
     }
     
-    // Apply location filter from search bar
-    if (searchCriteria.location !== 'any') {
+    // Apply category filter from either search or sidebar
+    if (filterCriteria.categories && filterCriteria.categories.length > 0) {
       result = result.filter(job => 
-        job.location.toLowerCase() === searchCriteria.location.toLowerCase()
+        filterCriteria.categories.includes(job.category)
       );
-    }
-    
-    // Apply category filter from search bar
-    if (searchCriteria.category !== 'all') {
+    } else if (searchCriteria.category !== 'all') {
       result = result.filter(job => 
         job.category.toLowerCase() === searchCriteria.category.toLowerCase()
       );
     }
     
+    // Apply location filter from either search or sidebar
+    if (filterCriteria.locations && filterCriteria.locations.length > 0) {
+      result = result.filter(job => 
+        filterCriteria.locations.some(location => 
+          job.location.toLowerCase() === location.toLowerCase()
+        )
+      );
+    } else if (searchCriteria.location !== 'any') {
+      result = result.filter(job => 
+        job.location.toLowerCase() === searchCriteria.location.toLowerCase()
+      );
+    }
+    
     // Apply job type filter
-    if (filterCriteria.jobTypes.length > 0) {
+    if (filterCriteria.jobTypes && filterCriteria.jobTypes.length > 0) {
       result = result.filter(job => 
         filterCriteria.jobTypes.includes(job.jobType)
       );
     }
     
     // Apply experience level filter
-    if (filterCriteria.experienceLevels.length > 0) {
-      // This is a simplified implementation as the mock job data doesn't include experience level
+    if (filterCriteria.experienceLevels && filterCriteria.experienceLevels.length > 0) {
+      // This is a simplified implementation as the mock job data might not include experience level
       // In a real application, you would filter by job.experienceLevel
     }
     
     // Apply salary range filter
-    const [minSalary, maxSalary] = filterCriteria.salary;
-    result = result.filter(job => {
-      // Extract numeric salary from string like "€50,000 - €70,000"
-      const salaryText = job.salary;
-      const salaryNumbers = salaryText.match(/\d+,\d+/g);
-      if (salaryNumbers && salaryNumbers.length >= 1) {
-        const avgSalary = parseInt(salaryNumbers[0].replace(',', ''));
-        return avgSalary >= minSalary && avgSalary <= maxSalary;
-      }
-      return true; // Keep jobs with unparseable salary
-    });
+    if (filterCriteria.salary && filterCriteria.salary.length === 2) {
+      const [minSalary, maxSalary] = filterCriteria.salary;
+      result = result.filter(job => {
+        // Extract numeric salary from string like "€50,000 - €70,000"
+        const salaryText = job.salary;
+        const salaryNumbers = salaryText.match(/\d+,\d+/g);
+        if (salaryNumbers && salaryNumbers.length >= 1) {
+          const avgSalary = parseInt(salaryNumbers[0].replace(',', ''));
+          return avgSalary >= minSalary && avgSalary <= maxSalary;
+        }
+        return true; // Keep jobs with unparseable salary
+      });
+    }
     
     // Apply post date filter
     if (filterCriteria.postDate !== 'any_time') {
@@ -127,20 +162,11 @@ const JobsPage = () => {
       });
     }
     
-    // Apply location filters from sidebar
-    if (filterCriteria.locations.length > 0) {
-      result = result.filter(job => 
-        filterCriteria.locations.some(location => 
-          job.location.toLowerCase().includes(location.toLowerCase())
-        )
-      );
-    }
-    
     // Apply sorting
     result = sortJobs(result, sortOption);
     
     setFilteredJobs(result);
-  }, [searchCriteria, filterCriteria, sortOption]);
+  }, [searchCriteria, filterCriteria, sortOption, allJobs]);
   
   // Sort jobs based on selected option
   const sortJobs = (jobs: Job[], sortOption: string) => {
@@ -205,6 +231,18 @@ const JobsPage = () => {
     }
   };
 
+  // Calculate active filter count for indicator
+  const getActiveFilterCount = () => {
+    let count = 0;
+    if (filterCriteria.jobTypes.length > 0) count++;
+    if (filterCriteria.experienceLevels.length > 0) count++;
+    if (filterCriteria.locations.length > 0) count++;
+    if (filterCriteria.categories.length > 0) count++;
+    if (filterCriteria.postDate !== 'any_time') count++;
+    if (filterCriteria.salary[0] > 0 || filterCriteria.salary[1] < 120000) count++;
+    return count;
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <SEO 
@@ -241,13 +279,24 @@ const JobsPage = () => {
                 <>
                   <ListFilter className="h-4 w-4" />
                   <span>Show Filters</span>
+                  {getActiveFilterCount() > 0 && (
+                    <span className="ml-1 inline-flex items-center justify-center w-5 h-5 text-xs bg-german-primary text-white rounded-full">
+                      {getActiveFilterCount()}
+                    </span>
+                  )}
                 </>
               )}
             </Button>
             
             {/* Filters Sidebar - hidden on mobile until toggled */}
             <div className={`md:w-1/4 ${showFilters ? 'block' : 'hidden md:block'}`}>
-              <JobFilter onFilterChange={handleFilterChange} />
+              <JobFilter 
+                onFilterChange={handleFilterChange}
+                initialFilters={filterCriteria}
+                categories={uniqueCategories} 
+                jobTypes={uniqueJobTypes}
+                locations={uniqueLocations}
+              />
             </div>
             
             {/* Jobs List */}
@@ -255,6 +304,11 @@ const JobsPage = () => {
               <div className="bg-white p-4 rounded-lg shadow-sm mb-6 flex justify-between items-center flex-wrap gap-4">
                 <p className="text-german-muted">
                   Showing <span className="font-medium text-german-dark">{filteredJobs.length}</span> jobs
+                  {getActiveFilterCount() > 0 && (
+                    <span className="ml-2">
+                      with <span className="font-medium text-german-dark">{getActiveFilterCount()}</span> active filters
+                    </span>
+                  )}
                 </p>
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-german-muted mr-2">Sort by:</span>
@@ -286,7 +340,8 @@ const JobsPage = () => {
                         experienceLevels: [],
                         salary: [0, 120000],
                         postDate: 'any_time',
-                        locations: []
+                        locations: [],
+                        categories: []
                       });
                     }} 
                     variant="outline"

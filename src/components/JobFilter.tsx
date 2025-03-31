@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionContent,
@@ -21,16 +21,74 @@ import { FilterX, Check } from 'lucide-react';
 
 interface JobFilterProps {
   onFilterChange?: (filters: any) => void;
+  initialFilters?: any;
+  categories?: string[];
+  jobTypes?: string[];
+  experienceLevels?: string[];
+  locations?: string[];
 }
 
-const JobFilter = ({ onFilterChange }: JobFilterProps) => {
+const JobFilter = ({ 
+  onFilterChange, 
+  initialFilters,
+  categories = ["IT & Technology", "Engineering", "Finance", "Healthcare", "Marketing", "Education", "Sales"],
+  jobTypes = ["Full-time", "Part-time", "Contract", "Internship", "Remote"],
+  experienceLevels = ["Entry Level", "Mid Level", "Senior Level", "Manager", "Executive"],
+  locations = ["Berlin", "Munich", "Hamburg", "Frankfurt", "Cologne", "Stuttgart", "Düsseldorf"]
+}: JobFilterProps) => {
   const [filters, setFilters] = useState({
     jobTypes: [] as string[],
     experienceLevels: [] as string[],
     salary: [30000, 70000],
     postDate: 'any_time',
     locations: [] as string[],
+    categories: [] as string[],
   });
+  
+  // Update local filters when initialFilters prop changes
+  useEffect(() => {
+    if (initialFilters) {
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        ...initialFilters
+      }));
+    }
+  }, [initialFilters]);
+
+  // Handle checkbox changes for array filter types
+  const handleCheckboxChange = (filterType: 'jobTypes' | 'experienceLevels' | 'locations' | 'categories', value: string) => {
+    setFilters(prevFilters => {
+      const currentValues = [...prevFilters[filterType]];
+      const index = currentValues.indexOf(value);
+      
+      if (index >= 0) {
+        currentValues.splice(index, 1);
+      } else {
+        currentValues.push(value);
+      }
+      
+      return {
+        ...prevFilters,
+        [filterType]: currentValues
+      };
+    });
+  };
+  
+  // Handle slider changes for salary range
+  const handleSalaryChange = (values: number[]) => {
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      salary: values
+    }));
+  };
+  
+  // Handle select changes for date posted
+  const handleDateChange = (value: string) => {
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      postDate: value
+    }));
+  };
   
   const handleApplyFilters = () => {
     if (onFilterChange) {
@@ -39,23 +97,32 @@ const JobFilter = ({ onFilterChange }: JobFilterProps) => {
   };
   
   const handleResetFilters = () => {
-    setFilters({
+    const resetFilters = {
       jobTypes: [],
       experienceLevels: [],
       salary: [30000, 70000],
       postDate: 'any_time',
       locations: [],
-    });
+      categories: [],
+    };
+    
+    setFilters(resetFilters);
     
     if (onFilterChange) {
       onFilterChange({
-        jobTypes: [],
-        experienceLevels: [],
-        salary: [0, 120000],
-        postDate: 'any_time',
-        locations: [],
+        ...resetFilters,
+        salary: [0, 120000], // Full salary range for reset
       });
     }
+  };
+  
+  // Format currency values for display
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('de-DE', {
+      style: 'currency',
+      currency: 'EUR',
+      maximumFractionDigits: 0
+    }).format(value);
   };
   
   return (
@@ -67,9 +134,13 @@ const JobFilter = ({ onFilterChange }: JobFilterProps) => {
           <AccordionTrigger className="text-base font-medium">Job Category</AccordionTrigger>
           <AccordionContent>
             <div className="space-y-2 pt-2">
-              {["IT & Technology", "Engineering", "Finance", "Healthcare", "Marketing", "Education", "Sales"].map((category) => (
+              {categories.map((category) => (
                 <div key={category} className="flex items-center space-x-2">
-                  <Checkbox id={`category-${category}`} />
+                  <Checkbox 
+                    id={`category-${category}`} 
+                    checked={filters.categories.includes(category)}
+                    onCheckedChange={() => handleCheckboxChange('categories', category)}
+                  />
                   <Label htmlFor={`category-${category}`} className="text-sm cursor-pointer">
                     {category}
                   </Label>
@@ -83,9 +154,13 @@ const JobFilter = ({ onFilterChange }: JobFilterProps) => {
           <AccordionTrigger className="text-base font-medium">Job Type</AccordionTrigger>
           <AccordionContent>
             <div className="space-y-2 pt-2">
-              {["Full-time", "Part-time", "Contract", "Internship", "Remote"].map((type) => (
+              {jobTypes.map((type) => (
                 <div key={type} className="flex items-center space-x-2">
-                  <Checkbox id={`jobType-${type}`} />
+                  <Checkbox 
+                    id={`jobType-${type}`} 
+                    checked={filters.jobTypes.includes(type)}
+                    onCheckedChange={() => handleCheckboxChange('jobTypes', type)}
+                  />
                   <Label htmlFor={`jobType-${type}`} className="text-sm cursor-pointer">
                     {type}
                   </Label>
@@ -99,13 +174,19 @@ const JobFilter = ({ onFilterChange }: JobFilterProps) => {
           <AccordionTrigger className="text-base font-medium">Salary Range</AccordionTrigger>
           <AccordionContent>
             <div className="pt-2">
-              <Slider defaultValue={[30000, 70000]} min={0} max={120000} step={5000} />
+              <Slider 
+                value={filters.salary} 
+                min={0} 
+                max={120000} 
+                step={5000} 
+                onValueChange={handleSalaryChange}
+              />
               <div className="flex justify-between mt-2 text-sm text-gray-500">
                 <span>€0</span>
                 <span>€120k+</span>
               </div>
               <div className="text-center mt-3 text-sm">
-                €30,000 - €70,000
+                {formatCurrency(filters.salary[0])} - {formatCurrency(filters.salary[1])}
               </div>
             </div>
           </AccordionContent>
@@ -115,9 +196,13 @@ const JobFilter = ({ onFilterChange }: JobFilterProps) => {
           <AccordionTrigger className="text-base font-medium">Experience Level</AccordionTrigger>
           <AccordionContent>
             <div className="space-y-2 pt-2">
-              {["Entry Level", "Mid Level", "Senior Level", "Manager", "Executive"].map((level) => (
+              {experienceLevels.map((level) => (
                 <div key={level} className="flex items-center space-x-2">
-                  <Checkbox id={`exp-${level}`} />
+                  <Checkbox 
+                    id={`exp-${level}`} 
+                    checked={filters.experienceLevels.includes(level)}
+                    onCheckedChange={() => handleCheckboxChange('experienceLevels', level)}
+                  />
                   <Label htmlFor={`exp-${level}`} className="text-sm cursor-pointer">
                     {level}
                   </Label>
@@ -131,7 +216,10 @@ const JobFilter = ({ onFilterChange }: JobFilterProps) => {
           <AccordionTrigger className="text-base font-medium">Date Posted</AccordionTrigger>
           <AccordionContent>
             <div className="pt-2">
-              <Select>
+              <Select 
+                value={filters.postDate}
+                onValueChange={handleDateChange}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Any time" />
                 </SelectTrigger>
@@ -151,9 +239,13 @@ const JobFilter = ({ onFilterChange }: JobFilterProps) => {
           <AccordionTrigger className="text-base font-medium">Location</AccordionTrigger>
           <AccordionContent>
             <div className="space-y-2 pt-2">
-              {["Berlin", "Munich", "Hamburg", "Frankfurt", "Cologne", "Stuttgart", "Düsseldorf"].map((city) => (
+              {locations.map((city) => (
                 <div key={city} className="flex items-center space-x-2">
-                  <Checkbox id={`city-${city}`} />
+                  <Checkbox 
+                    id={`city-${city}`} 
+                    checked={filters.locations.includes(city)}
+                    onCheckedChange={() => handleCheckboxChange('locations', city)}
+                  />
                   <Label htmlFor={`city-${city}`} className="text-sm cursor-pointer">
                     {city}
                   </Label>
