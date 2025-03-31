@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Accordion,
   AccordionContent,
@@ -16,12 +16,48 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { FilterX, Check } from 'lucide-react';
 
 interface JobFilterProps {
   onFilterChange?: (filters: any) => void;
 }
 
 const JobFilter = ({ onFilterChange }: JobFilterProps) => {
+  const [filters, setFilters] = useState({
+    jobTypes: [] as string[],
+    experienceLevels: [] as string[],
+    salary: [30000, 70000],
+    postDate: 'any_time',
+    locations: [] as string[],
+  });
+  
+  const handleApplyFilters = () => {
+    if (onFilterChange) {
+      onFilterChange(filters);
+    }
+  };
+  
+  const handleResetFilters = () => {
+    setFilters({
+      jobTypes: [],
+      experienceLevels: [],
+      salary: [30000, 70000],
+      postDate: 'any_time',
+      locations: [],
+    });
+    
+    if (onFilterChange) {
+      onFilterChange({
+        jobTypes: [],
+        experienceLevels: [],
+        salary: [0, 120000],
+        postDate: 'any_time',
+        locations: [],
+      });
+    }
+  };
+  
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-lg font-semibold mb-4">Filter Jobs</h2>
@@ -127,6 +163,25 @@ const JobFilter = ({ onFilterChange }: JobFilterProps) => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+      
+      <div className="mt-6 space-y-3">
+        <Button 
+          onClick={handleApplyFilters}
+          className="w-full bg-german-primary hover:bg-german-primary/90 flex items-center justify-center gap-2"
+        >
+          <Check className="h-4 w-4" />
+          Apply Filters
+        </Button>
+        
+        <Button 
+          onClick={handleResetFilters}
+          variant="outline" 
+          className="w-full flex items-center justify-center gap-2"
+        >
+          <FilterX className="h-4 w-4" />
+          Reset Filters
+        </Button>
+      </div>
     </div>
   );
 };
