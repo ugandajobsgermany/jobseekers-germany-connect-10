@@ -20,8 +20,8 @@ const loginSchema = z.object({
 })
 
 const registerSchema = z.object({
-  fullName: z.string().min(2, 'Please enter your full name'),
-  phoneNumber: z.string().min(8, 'Please enter a valid phone number'),
+  fullName: z.string().min(2, 'Please enter your full name').max(100, 'Name is too long'),
+  phoneNumber: z.string().min(8, 'Please enter a valid phone number').max(20, 'Phone number is too long'),
   email: z.string().email('Please enter a valid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
 })
@@ -158,11 +158,12 @@ const AuthPage = () => {
                     name="fullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Full Name</FormLabel>
+                        <FormLabel>Full Name <span className="text-red-500">*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="John Doe"
                             disabled={isLoading}
+                            required
                             {...field}
                           />
                         </FormControl>
@@ -175,11 +176,12 @@ const AuthPage = () => {
                     name="phoneNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Phone Number</FormLabel>
+                        <FormLabel>Phone Number <span className="text-red-500">*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="+1234567890"
                             disabled={isLoading}
+                            required
                             {...field}
                           />
                         </FormControl>
@@ -192,12 +194,13 @@ const AuthPage = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>Email <span className="text-red-500">*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="your.email@example.com"
                             type="email"
                             disabled={isLoading}
+                            required
                             {...field}
                           />
                         </FormControl>
@@ -210,11 +213,12 @@ const AuthPage = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>Password <span className="text-red-500">*</span></FormLabel>
                         <FormControl>
                           <Input 
                             type="password"
                             disabled={isLoading}
+                            required
                             {...field}
                           />
                         </FormControl>

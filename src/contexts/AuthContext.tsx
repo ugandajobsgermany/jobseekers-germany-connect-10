@@ -9,7 +9,7 @@ interface AuthContextType {
   user: User | null
   loading: boolean
   signIn: (email: string, password: string) => Promise<void>
-  signUp: (email: string, password: string, fullName?: string, phoneNumber?: string) => Promise<void>
+  signUp: (email: string, password: string, fullName: string, phoneNumber: string) => Promise<void>
   signOut: () => Promise<void>
 }
 
@@ -59,9 +59,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }
 
-  const signUp = async (email: string, password: string, fullName?: string, phoneNumber?: string) => {
+  const signUp = async (email: string, password: string, fullName: string, phoneNumber: string) => {
     try {
-      const { error } = await supabase.auth.signUp({
+      // Validate that fullName and phoneNumber are provided
+      if (!fullName || !phoneNumber) {
+        throw new Error("Full name and phone number are required");
+      }
+      
+      const { error, data } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -71,7 +76,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           }
         }
       })
+      
       if (error) throw error
+      
+      // Manually update the profile if needed (handled by database trigger but ensuring it's set)
+      if (data.user) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .update({
+            full_name: fullName,
+            phone_number: phoneNumber
+          })
+          .eq('id', data.user.id)
+        
+        if (profileError) {
+          console.error('Error updating profile:', profileError);
+        }
+      }
       
       toast({
         title: "Registration successful",
