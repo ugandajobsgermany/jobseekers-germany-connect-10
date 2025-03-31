@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -12,10 +12,31 @@ import {
 } from '@/components/ui/select';
 import { Search } from 'lucide-react';
 
-const SearchBar = ({ onSearch }: { onSearch?: (criteria: any) => void }) => {
-  const [keywords, setKeywords] = useState('');
-  const [location, setLocation] = useState('any');
-  const [category, setCategory] = useState('all');
+interface SearchBarProps {
+  onSearch?: (criteria: SearchCriteria) => void;
+  initialValues?: SearchCriteria;
+  className?: string;
+}
+
+interface SearchCriteria {
+  keywords: string;
+  location: string;
+  category: string;
+}
+
+const SearchBar = ({ onSearch, initialValues, className }: SearchBarProps) => {
+  const [keywords, setKeywords] = useState(initialValues?.keywords || '');
+  const [location, setLocation] = useState(initialValues?.location || 'any');
+  const [category, setCategory] = useState(initialValues?.category || 'all');
+  
+  // Update state when initialValues change (e.g., when filters are reset)
+  useEffect(() => {
+    if (initialValues) {
+      setKeywords(initialValues.keywords || '');
+      setLocation(initialValues.location || 'any');
+      setCategory(initialValues.category || 'all');
+    }
+  }, [initialValues]);
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +52,7 @@ const SearchBar = ({ onSearch }: { onSearch?: (criteria: any) => void }) => {
   return (
     <form 
       onSubmit={handleSearch}
-      className="bg-white p-6 rounded-lg shadow-md w-full max-w-4xl mx-auto"
+      className={`bg-white p-6 rounded-lg shadow-md w-full max-w-4xl mx-auto ${className || ''}`}
     >
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="md:col-span-2">
