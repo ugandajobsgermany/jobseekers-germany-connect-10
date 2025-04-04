@@ -5,45 +5,46 @@ import JobListSchema from './SEO/JobListSchema';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { mockJobs } from '@/data/jobs';
 import { Job } from '@/types/job';
+import { sortJobs } from '@/utils/jobSorting';
+import { useQuery } from '@tanstack/react-query';
+
+// Function to fetch jobs (replacing mock data)
+const fetchJobs = async (): Promise<Job[]> => {
+  // In a real implementation, this would be an API call
+  // For now, we'll import from a central location
+  const { mockJobs } = await import('@/data/jobs');
+  return mockJobs;
+};
 
 const FeaturedJobs = () => {
-  const [jobs, setJobs] = useState<Job[]>([]);
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
+  const [featuredJobs, setFeaturedJobs] = useState<Job[]>([]);
 
-  // Sort and prepare jobs
+  // Use React Query to fetch jobs
+  const { data: jobs = [] } = useQuery({
+    queryKey: ['jobs'],
+    queryFn: fetchJobs,
+  });
+
+  // Sort and prepare featured jobs
   useEffect(() => {
-    // Convert "postedAt" strings to sortable values
-    const getPostDays = (postedString: string): number => {
-      if (postedString.includes('day')) {
-        return parseInt(postedString.split(' ')[0]);
-      } else if (postedString.includes('week')) {
-        return parseInt(postedString.split(' ')[0]) * 7;
-      } else if (postedString.includes('month')) {
-        return parseInt(postedString.split(' ')[0]) * 30;
-      }
-      return 0;
-    };
-
-    const sortedJobs = [...mockJobs].sort((a, b) => {
-      const daysA = getPostDays(a.postedAt);
-      const daysB = getPostDays(b.postedAt);
-      
-      return sortOrder === 'newest' ? daysA - daysB : daysB - daysA;
-    });
-
+    if (jobs.length === 0) return;
+    
+    // Sort jobs based on selected sort order
+    const sortedJobs = sortJobs(jobs, sortOrder);
+    
     // Get top 6 jobs and mark first 2 as featured
-    setJobs(sortedJobs.slice(0, 6).map((job, index) => ({
+    setFeaturedJobs(sortedJobs.slice(0, 6).map((job, index) => ({
       ...job,
       isFeatured: index < 2
     })));
-  }, [sortOrder]);
+  }, [sortOrder, jobs]);
 
   return (
     <>
       {/* Add structured data for featured job listings */}
-      <JobListSchema jobs={jobs} />
+      <JobListSchema jobs={featuredJobs} />
       
       <section className="container mx-auto py-8 md:py-10">
         <div className="flex justify-between items-center mb-6">
@@ -80,7 +81,7 @@ const FeaturedJobs = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {jobs.map((job) => (
+          {featuredJobs.map((job) => (
             <JobCard key={job.id} {...job} />
           ))}
         </div>

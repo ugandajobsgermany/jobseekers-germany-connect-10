@@ -1,9 +1,16 @@
 
 import { useState, useEffect } from 'react';
 import { Job } from '@/types/job';
-import { mockJobs } from '@/data/jobs';
 import { applyAllFilters } from '@/utils/jobFilters';
 import { sortJobs } from '@/utils/jobSorting';
+import { useQuery } from '@tanstack/react-query';
+
+// Function to fetch jobs
+const fetchJobs = async (): Promise<Job[]> => {
+  // In a real implementation, this would be an API call
+  const { mockJobs } = await import('@/data/jobs');
+  return mockJobs;
+};
 
 // Search criteria type
 export interface SearchCriteria {
@@ -23,8 +30,7 @@ export interface FilterCriteria {
 }
 
 export const useJobsData = () => {
-  const [allJobs, setAllJobs] = useState<Job[]>(mockJobs);
-  const [filteredJobs, setFilteredJobs] = useState<Job[]>(mockJobs);
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [searchCriteria, setSearchCriteria] = useState<SearchCriteria>({
     keywords: '',
     location: 'any',
@@ -40,6 +46,12 @@ export const useJobsData = () => {
   });
   const [sortOption, setSortOption] = useState('relevant');
   const [currentPage, setCurrentPage] = useState(1);
+  
+  // Use React Query to fetch jobs
+  const { data: allJobs = [] } = useQuery({
+    queryKey: ['jobs'],
+    queryFn: fetchJobs,
+  });
   
   // Extract unique values for filters
   const uniqueCategories = [...new Set(allJobs.map(job => job.category))];
