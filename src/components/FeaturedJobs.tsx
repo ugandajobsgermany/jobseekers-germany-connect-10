@@ -7,12 +7,25 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Job } from '@/types/job';
 import { sortJobs } from '@/utils/jobSorting';
-import { useSupabaseJobs } from '@/hooks/useSupabaseJobs';
+import { useQuery } from '@tanstack/react-query';
+
+// Function to fetch jobs (replacing mock data)
+const fetchJobs = async (): Promise<Job[]> => {
+  // In a real implementation, this would be an API call
+  // For now, we'll import from a central location
+  const { mockJobs } = await import('@/data/jobs');
+  return mockJobs;
+};
 
 const FeaturedJobs = () => {
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
   const [featuredJobs, setFeaturedJobs] = useState<Job[]>([]);
-  const { jobs, isLoading } = useSupabaseJobs();
+
+  // Use React Query to fetch jobs
+  const { data: jobs = [], isLoading } = useQuery({
+    queryKey: ['jobs'],
+    queryFn: fetchJobs,
+  });
 
   // Sort and prepare featured jobs
   useEffect(() => {
