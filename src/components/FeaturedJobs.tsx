@@ -22,7 +22,7 @@ const FeaturedJobs = () => {
   const [featuredJobs, setFeaturedJobs] = useState<Job[]>([]);
 
   // Use React Query to fetch jobs
-  const { data: jobs = [] } = useQuery({
+  const { data: jobs = [], isLoading } = useQuery({
     queryKey: ['jobs'],
     queryFn: fetchJobs,
   });
@@ -34,12 +34,50 @@ const FeaturedJobs = () => {
     // Sort jobs based on selected sort order
     const sortedJobs = sortJobs(jobs, sortOrder);
     
-    // Get top 6 jobs and mark first 2 as featured
-    setFeaturedJobs(sortedJobs.slice(0, 6).map((job, index) => ({
+    // Prioritize entry-level jobs in our featured section
+    const entryLevelJobs = sortedJobs.filter(job => 
+      job.category === 'Warehouse & Logistics' || 
+      job.category === 'Transportation & Delivery' || 
+      job.category === 'Food Service & Hospitality' ||
+      job.category === 'Retail & Customer Service' ||
+      job.category === 'Cleaning & Maintenance' ||
+      job.category === 'Manufacturing' ||
+      job.category === 'Customer Service' ||
+      job.category === 'Security'
+    );
+    
+    // Get top 6 jobs, prioritizing entry-level but mixing in others if needed
+    let selectedJobs = entryLevelJobs.slice(0, 6);
+    if (selectedJobs.length < 6) {
+      // Fill remaining slots with other job types
+      const otherJobs = sortedJobs.filter(job => !entryLevelJobs.includes(job));
+      selectedJobs = [...selectedJobs, ...otherJobs.slice(0, 6 - selectedJobs.length)];
+    }
+    
+    // Mark first 2 as featured
+    setFeaturedJobs(selectedJobs.map((job, index) => ({
       ...job,
       isFeatured: index < 2
     })));
   }, [sortOrder, jobs]);
+
+  if (isLoading) {
+    return (
+      <section className="container mx-auto py-8 md:py-10">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-german-dark mb-1">Featured Jobs</h2>
+            <p className="text-german-muted text-sm">Loading opportunities...</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {[...Array(6)].map((_, index) => (
+            <div key={index} className="bg-gray-100 animate-pulse h-48 rounded-lg"></div>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <>
@@ -50,7 +88,7 @@ const FeaturedJobs = () => {
         <div className="flex justify-between items-center mb-6">
           <div>
             <h2 className="text-2xl font-bold text-german-dark mb-1">Featured Jobs</h2>
-            <p className="text-german-muted text-sm">Handpicked opportunities from top German companies</p>
+            <p className="text-german-muted text-sm">Entry-level opportunities from top German companies</p>
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden md:flex">
