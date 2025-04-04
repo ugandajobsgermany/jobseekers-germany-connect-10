@@ -36,6 +36,54 @@ export type Database = {
         }
         Relationships: []
       }
+      jobs: {
+        Row: {
+          benefits: string[]
+          category: string
+          company: string
+          company_logo: string | null
+          created_at: string
+          description: string
+          id: string
+          is_featured: boolean | null
+          job_type: string
+          location: string
+          requirements: string[]
+          salary: string
+          title: string
+        }
+        Insert: {
+          benefits: string[]
+          category: string
+          company: string
+          company_logo?: string | null
+          created_at?: string
+          description: string
+          id?: string
+          is_featured?: boolean | null
+          job_type: string
+          location: string
+          requirements: string[]
+          salary: string
+          title: string
+        }
+        Update: {
+          benefits?: string[]
+          category?: string
+          company?: string
+          company_logo?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          is_featured?: boolean | null
+          job_type?: string
+          location?: string
+          requirements?: string[]
+          salary?: string
+          title?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null

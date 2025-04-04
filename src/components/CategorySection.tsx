@@ -1,16 +1,8 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { CodeIcon, HeartPulse, LightbulbIcon, LineChart, GraduationCap, ShoppingBag, Settings, Hotel, Truck, UtensilsCrossed, Home, Shield, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-
-// Function to fetch jobs
-const fetchJobs = async () => {
-  // In a real implementation, this would be an API call
-  const { mockJobs } = await import('@/data/jobs');
-  return mockJobs;
-};
+import { useSupabaseJobs } from '@/hooks/useSupabaseJobs';
 
 const categoryIconMap = {
   'IT & Technology': CodeIcon,
@@ -76,17 +68,12 @@ const categoryColorMap = {
 };
 
 const CategorySection = () => {
-  const { data: jobs = [] } = useQuery({
-    queryKey: ['jobs'],
-    queryFn: fetchJobs,
-  });
-  
+  const { jobs = [] } = useSupabaseJobs();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     if (jobs.length === 0) return;
     
-    // Count jobs by category
     const categoryCounts = {};
     jobs.forEach(job => {
       if (!categoryCounts[job.category]) {
@@ -95,8 +82,6 @@ const CategorySection = () => {
       categoryCounts[job.category]++;
     });
     
-    // Convert to array of category objects for display
-    // Sort by count (descending) and take top 8
     const categoryItems = Object.keys(categoryCounts)
       .map(name => ({
         id: categoryUrlMap[name] || name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-'),
