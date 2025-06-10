@@ -14,4 +14,9 @@ export interface Job {
   benefits: string[];
   isSaved?: boolean;
   isApplied?: boolean;
+  isFeatured?: boolean;
+  experienceLevel?: string;
+  isRemote?: boolean;
+  views?: number;
+  status?: string;
 }
