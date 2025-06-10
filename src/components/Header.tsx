@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, User, LogOut } from 'lucide-react';
+import { Menu, X, User, LogOut, Shield } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useUserRole } from '@/hooks/useSupabaseData';
 import { 
   Sheet, 
   SheetContent, 
@@ -15,12 +16,15 @@ import {
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const { data: userRole } = useUserRole();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
     await signOut();
     navigate('/auth');
   };
+
+  const isAdmin = userRole === 'admin';
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -43,6 +47,12 @@ const Header = () => {
             <Link to="/resources" className="text-german-dark hover:text-german-primary font-medium">
               Resources
             </Link>
+            {isAdmin && (
+              <Link to="/admin" className="text-german-primary hover:text-german-dark font-medium flex items-center gap-1">
+                <Shield className="h-4 w-4" />
+                Admin
+              </Link>
+            )}
           </nav>
           
           <div className="hidden md:flex items-center space-x-4">
@@ -93,6 +103,12 @@ const Header = () => {
                   <Link to="/resources" className="text-german-dark hover:text-german-primary font-medium py-2">
                     Resources
                   </Link>
+                  {isAdmin && (
+                    <Link to="/admin" className="text-german-primary hover:text-german-dark font-medium py-2 flex items-center gap-2">
+                      <Shield className="h-4 w-4" />
+                      Admin Panel
+                    </Link>
+                  )}
                   <div className="pt-2">
                     {user ? (
                       <Button 

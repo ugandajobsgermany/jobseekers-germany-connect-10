@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge'
 import { Search, UserPlus, Shield, User } from 'lucide-react'
 import { useAdminUsers, useUpdateUserRole } from '@/hooks/useAdminData'
-import { useToast } from '@/hooks/use-toast'
+import { useToast } from '@/components/ui/use-toast'
 import {
   Dialog,
   DialogContent,
