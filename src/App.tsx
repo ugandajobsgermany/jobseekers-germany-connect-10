@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import AuthGuard from "@/components/AuthGuard";
+import AdminGuard from "@/components/AdminGuard";
+import AdminLayout from "@/components/admin/AdminLayout";
 import AuthPage from "@/pages/AuthPage";
 import Index from "./pages/Index";
 import JobsPage from "./pages/JobsPage";
@@ -20,6 +22,8 @@ import RelocationPage from "./pages/RelocationPage";
 import GermanLanguagePage from "./pages/GermanLanguagePage";
 import BlogPage from "./pages/BlogPage";
 import FAQPage from "./pages/FAQPage";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import UsersManagement from "./pages/admin/UsersManagement";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +48,13 @@ const App = () => (
               <Route path="/german-language" element={<AuthGuard><GermanLanguagePage /></AuthGuard>} />
               <Route path="/blog" element={<AuthGuard><BlogPage /></AuthGuard>} />
               <Route path="/faq" element={<AuthGuard><FAQPage /></AuthGuard>} />
+              
+              {/* Admin Routes */}
+              <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="users" element={<UsersManagement />} />
+              </Route>
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
           </TooltipProvider>
